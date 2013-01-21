@@ -7,20 +7,24 @@
 //
 
 #import "AppDelegate.h"
-
-#import "ViewController.h"
+#import "MyViewController.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize viewController = _viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    
+    MyViewController *myViewControllerObj = [[MyViewController alloc] init];
+    [myViewControllerObj setTitle:@"Available"];
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Manager" style:UIBarButtonItemStyleBordered target:myViewControllerObj action:@selector(showManagerButtonTapped:)];
+    [myViewControllerObj.navigationItem setRightBarButtonItem:rightBarButtonItem];
+    
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:myViewControllerObj];
+    self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     return YES;
 }
