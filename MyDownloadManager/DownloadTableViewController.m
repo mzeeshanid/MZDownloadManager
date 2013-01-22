@@ -492,23 +492,28 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.tableView reloadData];
     
-    NSInteger index = -1;
-    NSMutableDictionary *userInfo = nil;
-    for (ASIHTTPRequest *req in downloadingArray)
+    if([self.delegate respondsToSelector:@selector(downloadController:failedDownloadingReqeust:)])
+        [self.delegate downloadController:self failedDownloadingReqeust:request];
+    else
     {
-        if ([req isEqual:request])
+        NSInteger index = -1;
+        NSMutableDictionary *userInfo = nil;
+        for (ASIHTTPRequest *req in downloadingArray)
         {
-            userInfo = [NSMutableDictionary dictionaryWithDictionary:[req userInfo]];
-            index = [downloadingArray indexOfObject:req];
-            break;
+            if ([req isEqual:request])
+            {
+                userInfo = [NSMutableDictionary dictionaryWithDictionary:[req userInfo]];
+                index = [downloadingArray indexOfObject:req];
+                break;
+            }
         }
-    }
-    if (index != -1)
-    {
-        [self removeRequestAtIndex:index];
-        
-        if([self.delegate respondsToSelector:@selector(downloadController:failedDownloadingReqeust:)])
-            [self.delegate downloadController:self failedDownloadingReqeust:request];
+        if (index != -1)
+        {
+            [self removeRequestAtIndex:index];
+            
+            if([self.delegate respondsToSelector:@selector(downloadController:failedDownloadingReqeust:)])
+                [self.delegate downloadController:self failedDownloadingReqeust:request];
+        }
     }
 }
 @end
