@@ -1,100 +1,36 @@
-  
+<h4>MZDownloadManager</h4>
 
+![mzdownload manager hero](https://cloud.githubusercontent.com/assets/2767152/3459842/0c40fe66-0211-11e4-90d8-d8942c8f8651.png)
 
+<h3> Features:</h3>
 
-This download manager uses the ASIHTTPRequest classes to download files.
-Can download files in back ground. 
-Can download multiple files once at a time.
-It can resume interrupted downloads.
+This download manager uses the iOS 7 NSURLSession api to download files.<ol><li>Can download large files if app is in background.</li><li>Can download files if app is in background.</li><li>Can download multiple files at a time.</li><li>It can resume interrupted downloads.</li><li>User can also pause the download.</li><li>User can retry any download if any error occurred during download.</li></ol>
+<h3>Requirements:</h3>
+<ol><li>Please note that for resuming downloads server must have resuming support.</li><li>Please note that by using this control your app minimum deployment target will be iOS 7.</li></ol>
+<h3>Screencast:</h3>
+http://screencast.com/t/Rzm0xoRjGF
+<h3>Usage:</h3>
+<i><strong>See the demo project it is very simple and straight forward.</i></strong>
+<strong>Steps:</strong>
+Copy all files from <strong><i>MZDownloadManager</i></strong> group from sample project.
+<ol><li>Setup your available downloads view controller.</li><li>Initialize <strong><i>MZDownloadManagerViewController</i></strong> and set its <strong><i>delegate.<i></strong> Initialize its downloading array and setup <strong><i>background session configuration.</i></strong> Interrupted downloads can be restore by instance method.</li>
+<pre><code>- (void)populateOtherDownloadTasks</code></pre>
+All steps will look like the following:
+<pre><code>UINavigationController *mzDownloadingNav = [self.tabBarController.viewControllers objectAtIndex:1];
+mzDownloadingViewObj = [mzDownloadingNav.viewControllers objectAtIndex:0];
+[mzDownloadingViewObj setDelegate:self];
+    
+mzDownloadingViewObj.downloadingArray = [[NSMutableArray alloc] init];
+mzDownloadingViewObj.sessionManager = [mzDownloadingViewObj backgroundSession];
+[mzDownloadingViewObj populateOtherDownloadTasks]; </code></pre>
 
-USAGE:
-You need ASIHTTPRequest classes get it <a href="https://github.com/pokeb/asi-http-request">https://github.com/pokeb/asi-http-request</a> and setup your project
-Copy the downloadcell and downloadtableviewcontroller in your project.
-
-Simply in your view controller viewdidload method do:
-
-This will check for any interrupted download and resume it
-
-    downloadTableViewObj = [[DownloadTableViewController alloc] init];
-    [downloadTableViewObj setDelegate:self];
-    [downloadTableViewObj getInterruptedDownloadsAndResume];
-
-And populate url in an array like this:
-
-    urlArray = [NSMutableArray arrayWithObjects:
-    @"http://dl.dropbox.com/u/97700329/file1.mp4",
-    @"http://dl.dropbox.com/u/97700329/file2.mp4",
-    @"http://dl.dropbox.com/u/97700329/file3.mp4",nil];
-
-Remove the urls from your array that was interrupted because
-if you download one file multiple times it will cause problem
-
-    NSMutableArray *interruptedRequests = [[NSUserDefaults standardUserDefaults] objectForKey:@"interruptedDownloads"];
-    for(NSString *str in interruptedRequests)
-    {
-      if([urlArray containsObject:str])
-      [urlArray removeObject:str];
-    }
-    [myTableView reloadData];
-
-Set up table view in your view controller 
-
-    -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return urlArray.count;
-    }
-    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-    {
-      NSString *cellIdentifier = [NSString stringWithFormat:@"Cell-%d-%d-%d",indexPath.section,indexPath.row,urlArray.count];
-      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-      if(cell == Nil)
-      {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        [cell.textLabel setText:[[[urlArray objectAtIndex:indexPath.row] componentsSeparatedByString:@"/"] lastObject]];
-
-        UIButton *downloadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [downloadButton setFrame:CGRectMake(230, 5, 80, 35)];
-        [downloadButton setTitle:@"Download" forState:UIControlStateNormal];
-        [downloadButton addTarget:self action:@selector(downloadButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        [downloadButton setTag:indexPath.row];
-        [cell addSubview:downloadButton];
-      }
-        return cell;
-    }
-
-Create a request and call the method "addDownloadRequest" of DownloadTableViewController
-Set the file destination path
-
-    -(void)downloadButtonTapped:(UIButton *)sender
-    {
-      NSURL *url = [NSURL URLWithString:[urlArray objectAtIndex:sender.tag]];
-      ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:url];
-      NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-      [request setUserInfo:dictionary];
-      [downloadTableViewObj setDownloadDirectory:fileDestination];
-      [downloadTableViewObj addDownloadRequest:request];
-      [urlArray removeObjectAtIndex:sender.tag];
-      [myTableView reloadData];
-    }
-
-Use three delegate methods
-
-    -(void)downloadController:(DownloadTableViewController *)vc startedDownloadingRequest:(ASIHTTPRequest *)request
-    {
-      NSLog(@"download started %@",[request userInfo]);
-    }
-    -(void)downloadController:(DownloadTableViewController *)vc finishedDownloadingReqeust:(ASIHTTPRequest *)request
-    {
-      NSLog(@"download finished %@",[request userInfo]);
-    }
-    -(void)downloadController:(DownloadTableViewController *)vc failedDownloadingReqeust:(ASIHTTPRequest *)request
-    {
-      NSLog(@"Error %@",[request error]);
-      [urlArray addObject:[request.url absoluteString]];
-      [myTableView reloadData];
-
-      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error" message:[[request error] localizedDescription] delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-      [alert show];
-    }
-
-That's it
-
+<i><strong>Please note that i am using tab based application in sample project.</i></strong>
+<li>To add new download task you can use the instance method of MZDownloadManagerViewController.
+<pre><code>- (void)addDownloadTask:(NSString *)fileName fileURL:(NSString *)fileURL;</code></pre>
+</li><li>Use 3 delegate methods<br>
+<i>A delegate method called each time whenever new download task is start downloading.</i>
+<pre><code>- (void)downloadRequestStarted:(NSURLSessionDownloadTask *)downloadTask;</code></pre>
+<i>A delegate method called each time whenever any download task is cancelled by the user.</i>
+<pre></code>- (void)downloadRequestCanceled:(NSURLSessionDownloadTask *)downloadTask;</code></pre>
+<i>A delegate method called each time whenever any download task is finished successfully.</i>
+<pre><code>- (void)downloadRequestFinished:(NSString *)fileName;</code></pre></li></ol>
