@@ -1,3 +1,5 @@
+For swift check the swift branch. 
+For objective-c check the master branch.
 <h4>MZDownloadManager</h4>
 
 ![mzdownload manager hero](https://cloud.githubusercontent.com/assets/2767152/3459842/0c40fe66-0211-11e4-90d8-d8942c8f8651.png)
