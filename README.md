@@ -1,8 +1,12 @@
-<h6>For swift checkout the swift branch. <h6>
-<h6>For objective-c checkout the master branch.<h6>
+<b>For swift checkout the swift branch.</b>
+
+<b>For objective-c checkout the master branch.</b>
 <h4>MZDownloadManager</h4>
 
 ![mzdownload manager hero](https://cloud.githubusercontent.com/assets/2767152/3459842/0c40fe66-0211-11e4-90d8-d8942c8f8651.png)
+
+If you find MZDownloadManager userful consider donating thanks ;)</br>
+[![Donate button](https://www.paypalobjects.com/en_US/DE/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BMKTVHYK6PUUG)
 
 <h3> Features:</h3>
 
