@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0FA8637A72A03F7D3E0ABAB7'
+               BlueprintIdentifier = '98FEA2DA7CAC8503169EB851'
                BlueprintName = 'Pods-MZDownloadManager_Example'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_MZDownloadManager_Example.framework'>

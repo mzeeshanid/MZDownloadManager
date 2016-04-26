@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MZDownloadManager"
-  s.version          = "v2.4"
+  s.version          = "2.4"
   s.summary          = "NSURLSession based download manager."
 
   s.description      = "Download large files even in background, download multiple files, resume interrupted downloads."
@@ -18,16 +18,16 @@ Pod::Spec.new do |s|
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'BSD'
   s.author           = { "Muhammad Zeeshan" => "mzeeshanid@yahoo.com" }
-  s.source           = { :git => "https://github.com/mzeeshanid/MZDownloadManager.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/mzeeshanid/MZDownloadManager.git", :tag => s.version }
   s.social_media_url = 'https://twitter.com/mzeeshanid'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'MZDownloadManager/Classes/**/*'
+  s.source_files = 'MZDownloadManager/Classes/*.swift'
   s.resource_bundles = {
     'MZDownloadManager' => ['MZDownloadManager/Assets/*.png']
   }
 
-  s.public_header_files = 'Pod/Classes/**/*.{swift}'
+#  s.public_header_files = 'Pod/Classes/**/*.swift'
   s.frameworks = 'Foundation'
 end

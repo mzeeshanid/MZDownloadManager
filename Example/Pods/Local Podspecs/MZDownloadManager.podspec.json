@@ -1,24 +1,26 @@
 {
   "name": "MZDownloadManager",
-  "version": "0.1.0",
-  "summary": "A short description of MZDownloadManager.",
-  "description": "",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/MZDownloadManager",
-  "license": "MIT",
+  "version": "2.4",
+  "summary": "NSURLSession based download manager.",
+  "description": "Download large files even in background, download multiple files, resume interrupted downloads.",
+  "homepage": "https://github.com/mzeeshanid/MZDownloadManager",
+  "license": "BSD",
   "authors": {
     "Muhammad Zeeshan": "mzeeshanid@yahoo.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/MZDownloadManager.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/mzeeshanid/MZDownloadManager.git",
+    "tag": "2.4"
   },
+  "social_media_url": "https://twitter.com/mzeeshanid",
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "MZDownloadManager/Classes/**/*",
+  "source_files": "MZDownloadManager/Classes/*.swift",
   "resource_bundles": {
     "MZDownloadManager": [
       "MZDownloadManager/Assets/*.png"
     ]
-  }
+  },
+  "frameworks": "Foundation"
 }
