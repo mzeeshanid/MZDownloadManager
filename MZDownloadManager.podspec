@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MZDownloadManager"
-  s.version          = "0.1.0"
+  s.version          = "v2.4"
   s.summary          = "NSURLSession based download manager."
 
   s.description      = "Download large files even in background, download multiple files, resume interrupted downloads."
