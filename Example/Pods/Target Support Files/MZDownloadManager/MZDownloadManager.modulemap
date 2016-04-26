@@ -1,0 +1,6 @@
+framework module MZDownloadManager {
+  umbrella header "MZDownloadManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,33 @@
+PODS:
+  - FBSnapshotTestCase (2.1.0):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.0)
+  - FBSnapshotTestCase/Core (2.1.0)
+  - FBSnapshotTestCase/SwiftSupport (2.1.0):
+    - FBSnapshotTestCase/Core
+  - MZDownloadManager (0.1.0)
+  - Nimble (3.2.0)
+  - Nimble-Snapshots (4.0.1):
+    - FBSnapshotTestCase (~> 2.0)
+    - Nimble
+    - Quick
+  - Quick (0.9.2)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase
+  - MZDownloadManager (from `../`)
+  - Nimble (~> 3.0)
+  - Nimble-Snapshots
+  - Quick (~> 0.8)
+
+EXTERNAL SOURCES:
+  MZDownloadManager:
+    :path: ../
+
+SPEC CHECKSUMS:
+  FBSnapshotTestCase: 366ecd378511d7716c79991cd8067d1eed23578d
+  MZDownloadManager: 05f3de4b2a5f43d1b3918b6e3be02c5122507782
+  Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
+  Nimble-Snapshots: 2d15a585b816f7d14947ed6e172218f9d0980ea8
+  Quick: 18d057bc66451eedd5d1c8dc99ba2a5db6e60226
+
+COCOAPODS: 0.39.0
