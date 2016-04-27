@@ -11,10 +11,8 @@ import MZDownloadManager
 
 let alertControllerViewTag: Int = 500
 
-class MZDownloadManagerViewController: UIViewController {
-    
-    @IBOutlet var bgDownloadTableView : UITableView?
-    
+class MZDownloadManagerViewController: UITableViewController {
+
     var selectedIndexPath : NSIndexPath!
     
     lazy var downloadManager: MZDownloadManager = {
@@ -40,7 +38,7 @@ class MZDownloadManagerViewController: UIViewController {
     
     func refreshCellForIndex(downloadModel: MZDownloadModel, index: Int) {
         let indexPath = NSIndexPath.init(forRow: index, inSection: 0)
-        let cell = bgDownloadTableView?.cellForRowAtIndexPath(indexPath)
+        let cell = self.tableView.cellForRowAtIndexPath(indexPath)
         if let cell = cell {
             let downloadCell = cell as! MZDownloadingCell
             downloadCell.updateCellForRowAtIndexPath(indexPath, downloadModel: downloadModel)
@@ -50,15 +48,15 @@ class MZDownloadManagerViewController: UIViewController {
 
 // MARK: UITableViewDatasource Handler Extension
 
-extension MZDownloadManagerViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension MZDownloadManagerViewController {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return downloadManager.downloadingArray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier : NSString = "MZDownloadingCell"
-        let cell : MZDownloadingCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! MZDownloadingCell
+        let cell : MZDownloadingCell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! MZDownloadingCell
         
         let downloadModel = downloadManager.downloadingArray[indexPath.row]
         cell.updateCellForRowAtIndexPath(indexPath, downloadModel: downloadModel)
@@ -68,9 +66,11 @@ extension MZDownloadManagerViewController: UITableViewDataSource {
     }
 }
 
-extension MZDownloadManagerViewController: UITableViewDelegate {
+// MARK: UITableViewDelegate Handler Extension
+
+extension MZDownloadManagerViewController {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedIndexPath = indexPath
         
         let downloadModel = downloadManager.downloadingArray[indexPath.row]
@@ -173,11 +173,11 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
     
     func downloadRequestStarted(downloadModel: MZDownloadModel, index: Int) {
         let indexPath = NSIndexPath.init(forRow: index, inSection: 0)
-        bgDownloadTableView?.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
     func downloadRequestDidPopulatedInterruptedTasks(downloadModels: [MZDownloadModel]) {
-        bgDownloadTableView?.reloadData()
+        tableView.reloadData()
     }
     
     func downloadRequestDidUpdateProgress(downloadModel: MZDownloadModel, index: Int) {
@@ -197,7 +197,7 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
         self.safelyDismissAlertController()
         
         let indexPath = NSIndexPath.init(forRow: index, inSection: 0)
-        self.bgDownloadTableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
     }
     
     func downloadRequestFinished(downloadModel: MZDownloadModel, index: Int) {
@@ -207,10 +207,10 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
         downloadManager.presentNotificationForDownload("Ok", notifBody: "Download did completed")
         
         let indexPath = NSIndexPath.init(forRow: index, inSection: 0)
-        self.bgDownloadTableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
         
-//        let docDirectoryPath : NSString = fileDest.stringByAppendingPathComponent(fileName as String)
-//        NSNotificationCenter.defaultCenter().postNotificationName(DownloadCompletedNotif as String, object: docDirectoryPath)
+        let docDirectoryPath : NSString = (MZUtility.baseFilePath as NSString).stringByAppendingPathComponent(downloadModel.fileName)
+        NSNotificationCenter.defaultCenter().postNotificationName(MZUtility.DownloadCompletedNotif as String, object: docDirectoryPath)
     }
     
     func downloadRequestDidFailedWithError(error: NSError, downloadModel: MZDownloadModel, index: Int) {

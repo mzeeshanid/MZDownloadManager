@@ -9,9 +9,8 @@
 import UIKit
 import MZDownloadManager
 
-class MZAvailableDownloadsViewController: UIViewController {
-    @IBOutlet var availableDownloadTableView : UITableView?
-    
+class MZAvailableDownloadsViewController: UITableViewController {
+
     var mzDownloadingViewObj    : MZDownloadManagerViewController?
     var availableDownloadsArray: [String] = []
     
@@ -40,15 +39,17 @@ class MZAvailableDownloadsViewController: UIViewController {
     }
 }
 
-extension MZAvailableDownloadsViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//MARK: UITableViewDataSource Handler Extension
+
+extension MZAvailableDownloadsViewController {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return availableDownloadsArray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier : NSString = "AvailableDownloadsCell"
-        let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as UITableViewCell
+        let cell : UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as UITableViewCell
         
         let fileURL  : NSString = availableDownloadsArray[indexPath.row] as NSString
         let fileName : NSString = fileURL.lastPathComponent
@@ -59,13 +60,15 @@ extension MZAvailableDownloadsViewController: UITableViewDataSource {
     }
 }
 
-extension MZAvailableDownloadsViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//MARK: UITableViewDelegate Handler Extension
+
+extension MZAvailableDownloadsViewController {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let fileURL  : NSString = availableDownloadsArray[indexPath.row] as NSString
         var fileName : NSString = fileURL.lastPathComponent
-        fileName = MZUtility.getUniqueFileNameWithPath(fileDest.stringByAppendingPathComponent(fileName as String))
+        fileName = MZUtility.getUniqueFileNameWithPath((MZUtility.baseFilePath as NSString).stringByAppendingPathComponent(fileName as String))
         
         mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
         

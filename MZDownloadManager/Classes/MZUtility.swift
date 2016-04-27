@@ -8,22 +8,17 @@
 
 import UIKit
 
-let fileDest               : NSString = (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents")
-let DownloadCompletedNotif : NSString = "DownloadCompletedNotif"
-let kAlertTitle            : NSString = "Message"
+public class MZUtility: NSObject {
+    
+    public static let DownloadCompletedNotif: String = {
+        return "com.MZDownloadManager.DownloadCompletedNotif"
+    }()
+    
+    public static let baseFilePath: String = {
+        return (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents") as String
+    }()
 
-class MZUtility: NSObject {
-    
-    class func showAlertViewWithTitle(titl : NSString, msg : NSString) {
-        let alertview : UIAlertView = UIAlertView()
-        alertview.title = titl as String
-        alertview.message = msg as String
-        alertview.addButtonWithTitle("Ok")
-        alertview.cancelButtonIndex = 0
-        alertview.show()
-    }
-    
-    class func getUniqueFileNameWithPath(filePath : NSString) -> NSString {
+    public class func getUniqueFileNameWithPath(filePath : NSString) -> NSString {
         let fullFileName        : NSString = filePath.lastPathComponent
         let fileName            : NSString = fullFileName.stringByDeletingPathExtension
         let fileExtension       : NSString = fullFileName.pathExtension
@@ -60,7 +55,7 @@ class MZUtility: NSObject {
         return suggestedFileName
     }
     
-    class func calculateFileSizeInUnit(contentLength : Int64) -> Float {
+    public class func calculateFileSizeInUnit(contentLength : Int64) -> Float {
         let dataLength : Float64 = Float64(contentLength)
         if dataLength >= (1024.0*1024.0*1024.0) {
             return Float(dataLength/(1024.0*1024.0*1024.0))
@@ -73,7 +68,7 @@ class MZUtility: NSObject {
         }
     }
     
-    class func calculateUnit(contentLength : Int64) -> NSString {
+    public class func calculateUnit(contentLength : Int64) -> NSString {
         if(contentLength >= (1024*1024*1024)) {
             return "GB"
         } else if contentLength >= (1024*1024) {
@@ -85,7 +80,7 @@ class MZUtility: NSObject {
         }
     }
     
-    class func addSkipBackupAttributeToItemAtURL(docDirectoryPath : NSString) -> Bool {
+    public class func addSkipBackupAttributeToItemAtURL(docDirectoryPath : NSString) -> Bool {
         let url : NSURL = NSURL(fileURLWithPath: docDirectoryPath as String)
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(url.path!) {
@@ -103,7 +98,7 @@ class MZUtility: NSObject {
         }
     }
     
-    class func getFreeDiskspace() -> Int64? {
+    public class func getFreeDiskspace() -> Int64? {
         let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         let systemAttributes: AnyObject?
         do {

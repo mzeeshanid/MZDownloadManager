@@ -2,13 +2,13 @@
 //  MZDownloadManager.swift
 //  MZDownloadManager
 //
-//  Created by Hamid Ismail on 19/04/2016.
+//  Created by Muhammad Zeeshan on 19/04/2016.
 //  Copyright © 2016 ideamakerz. All rights reserved.
 //
 
 import UIKit
 
-@objc protocol MZDownloadManagerDelegate {
+@objc public protocol MZDownloadManagerDelegate {
     /**A delegate method called each time whenever any download task's progress is updated
      */
     func downloadRequestDidUpdateProgress(downloadModel: MZDownloadModel, index: Int)
@@ -39,15 +39,15 @@ import UIKit
     
 }
 
-class MZDownloadManager: NSObject {
+public class MZDownloadManager: NSObject {
     
-    var sessionManager: NSURLSession!
-    var downloadingArray: [MZDownloadModel] = []
-    var delegate: MZDownloadManagerDelegate?
+    private var sessionManager: NSURLSession!
+    public var downloadingArray: [MZDownloadModel] = []
+    private var delegate: MZDownloadManagerDelegate?
     
-    var backgroundSessionCompletionHandler: (() -> Void)?
+    private var backgroundSessionCompletionHandler: (() -> Void)?
     
-    convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate) {
+    public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate) {
         self.init()
         
         self.delegate = delegate
@@ -55,7 +55,7 @@ class MZDownloadManager: NSObject {
         self.populateOtherDownloadTasks()
     }
     
-    convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate, completion: (() -> Void)?) {
+    public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate, completion: (() -> Void)?) {
         self.init(session: sessionIdentifer, delegate: delegate)
         self.backgroundSessionCompletionHandler = completion
     }
@@ -76,15 +76,15 @@ class MZDownloadManager: NSObject {
     }
 }
 
-// MARK: Helper functions
+// MARK: Private Helper functions
 
 extension MZDownloadManager {
     
-    func downloadTasks() -> NSArray {
+    private func downloadTasks() -> NSArray {
         return self.tasksForKeyPath("downloadTasks")
     }
     
-    func tasksForKeyPath(keyPath: NSString) -> NSArray {
+    private func tasksForKeyPath(keyPath: NSString) -> NSArray {
         var tasks: NSArray = NSArray()
         let semaphore : dispatch_semaphore_t = dispatch_semaphore_create(0)
         sessionManager.getTasksWithCompletionHandler { (dataTasks, uploadTasks, downloadTasks) -> Void in
@@ -101,28 +101,8 @@ extension MZDownloadManager {
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         return tasks
     }
-    
-    func addDownloadTask(fileName: String, fileURL: String) {
-        
-        let url = NSURL(string: fileURL as String)!
-        let request = NSURLRequest(URL: url)
-        
-        let downloadTask = sessionManager.downloadTaskWithRequest(request)
-        downloadTask.taskDescription = [fileName, fileURL].joinWithSeparator(",")
-        downloadTask.resume()
-        
-        debugPrint("session manager:\(sessionManager) url:\(url) request:\(request)")
-        
-        let downloadModel = MZDownloadModel.init(fileName: fileName, fileURL: fileURL)
-        downloadModel.startTime = NSDate()
-        downloadModel.status = TaskStatus.Downloading.description()
-        downloadModel.task = downloadTask
-        
-        downloadingArray.append(downloadModel)
-        delegate?.downloadRequestStarted?(downloadModel, index: downloadingArray.count - 1)
-    }
-    
-    func populateOtherDownloadTasks() {
+
+    private func populateOtherDownloadTasks() {
         
         let downloadTasks = self.downloadTasks()
         
@@ -147,22 +127,8 @@ extension MZDownloadManager {
             }
         }
     }
-    
-    func presentNotificationForDownload(notifAction: String, notifBody: String) {
-        let application = UIApplication.sharedApplication()
-        let applicationState = application.applicationState
-        
-        if applicationState == UIApplicationState.Background {
-            let localNotification = UILocalNotification()
-            localNotification.alertBody = notifBody
-            localNotification.alertAction = notifAction
-            localNotification.soundName = UILocalNotificationDefaultSoundName
-            localNotification.applicationIconBadgeNumber += 1
-            application.presentLocalNotificationNow(localNotification)
-        }
-    }
-    
-    func isValidResumeData(resumeData: NSData?) -> Bool {
+
+    private func isValidResumeData(resumeData: NSData?) -> Bool {
         
         guard resumeData != nil || resumeData?.length > 0 else {
             return false
@@ -239,7 +205,7 @@ extension MZDownloadManager: NSURLSessionDelegate {
         for (index, downloadModel) in downloadingArray.enumerate() {
             if downloadTask.isEqual(downloadModel.task) {
                 let fileName = downloadModel.fileName as NSString
-                let destinationPath = fileDest.stringByAppendingPathComponent(fileName as String)
+                let destinationPath = (MZUtility.baseFilePath as NSString).stringByAppendingPathComponent(fileName as String)
                 let fileURL = NSURL(fileURLWithPath: destinationPath as String)
                 debugPrint("directory path = \(destinationPath)")
                 
@@ -340,7 +306,7 @@ extension MZDownloadManager: NSURLSessionDelegate {
         }
     }
     
-    func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
+    public func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
         
         if let backgroundCompletion = self.backgroundSessionCompletionHandler {
             dispatch_async(dispatch_get_main_queue(), {
@@ -352,8 +318,31 @@ extension MZDownloadManager: NSURLSessionDelegate {
     }
 }
 
+//MARK: Public Helper Functions
+
 extension MZDownloadManager {
-    func pauseDownloadTaskAtIndex(index: Int) {
+    
+    public func addDownloadTask(fileName: String, fileURL: String) {
+        
+        let url = NSURL(string: fileURL as String)!
+        let request = NSURLRequest(URL: url)
+        
+        let downloadTask = sessionManager.downloadTaskWithRequest(request)
+        downloadTask.taskDescription = [fileName, fileURL].joinWithSeparator(",")
+        downloadTask.resume()
+        
+        debugPrint("session manager:\(sessionManager) url:\(url) request:\(request)")
+        
+        let downloadModel = MZDownloadModel.init(fileName: fileName, fileURL: fileURL)
+        downloadModel.startTime = NSDate()
+        downloadModel.status = TaskStatus.Downloading.description()
+        downloadModel.task = downloadTask
+        
+        downloadingArray.append(downloadModel)
+        delegate?.downloadRequestStarted?(downloadModel, index: downloadingArray.count - 1)
+    }
+    
+    public func pauseDownloadTaskAtIndex(index: Int) {
         
         let downloadModel = downloadingArray[index]
         
@@ -371,7 +360,7 @@ extension MZDownloadManager {
         delegate?.downloadRequestDidPaused?(downloadModel, index: index)
     }
     
-    func resumeDownloadTaskAtIndex(index: Int) {
+    public func resumeDownloadTaskAtIndex(index: Int) {
         
         let downloadModel = downloadingArray[index]
         
@@ -388,7 +377,7 @@ extension MZDownloadManager {
         delegate?.downloadRequestDidResumed?(downloadModel, index: index)
     }
     
-    func retryDownloadTaskAtIndex(index: Int) {
+    public func retryDownloadTaskAtIndex(index: Int) {
         let downloadModel = downloadingArray[index]
         
         guard downloadModel.status != TaskStatus.Downloading.description() else {
@@ -405,11 +394,24 @@ extension MZDownloadManager {
         downloadingArray[index] = downloadModel
     }
     
-    func cancelTaskAtIndex(index: Int) {
+    public func cancelTaskAtIndex(index: Int) {
         
         let downloadInfo = downloadingArray[index]
         let downloadTask = downloadInfo.task
         downloadTask!.cancel()
     }
     
+    public func presentNotificationForDownload(notifAction: String, notifBody: String) {
+        let application = UIApplication.sharedApplication()
+        let applicationState = application.applicationState
+        
+        if applicationState == UIApplicationState.Background {
+            let localNotification = UILocalNotification()
+            localNotification.alertBody = notifBody
+            localNotification.alertAction = notifAction
+            localNotification.soundName = UILocalNotificationDefaultSoundName
+            localNotification.applicationIconBadgeNumber += 1
+            application.presentLocalNotificationNow(localNotification)
+        }
+    }
 }

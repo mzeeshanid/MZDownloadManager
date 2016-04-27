@@ -1,21 +1,15 @@
-#
-# Be sure to run `pod lib lint MZDownloadManager.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
 
 Pod::Spec.new do |s|
   s.name             = "MZDownloadManager"
-  s.version          = "2.4"
+  s.version          = "3.0"
   s.summary          = "NSURLSession based download manager."
 
-  s.description      = "Download large files even in background, download multiple files, resume interrupted downloads."
-
+  s.description      = <<-DESC
+                        Download large files even in background, download multiple files, resume interrupted downloads.
+                       DESC
 
   s.homepage         = "https://github.com/mzeeshanid/MZDownloadManager"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.screenshots      = "https://cloud.githubusercontent.com/assets/2767152/3459842/0c40fe66-0211-11e4-90d8-d8942c8f8651.png"
   s.license          = 'BSD'
   s.author           = { "Muhammad Zeeshan" => "mzeeshanid@yahoo.com" }
   s.source           = { :git => "https://github.com/mzeeshanid/MZDownloadManager.git", :tag => s.version }
@@ -23,11 +17,11 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'MZDownloadManager/Classes/*.swift'
+  s.source_files = 'MZDownloadManager/Classes/**/*'
   s.resource_bundles = {
     'MZDownloadManager' => ['MZDownloadManager/Assets/*.png']
   }
 
-#  s.public_header_files = 'Pod/Classes/**/*.swift'
-  s.frameworks = 'Foundation'
+  s.frameworks = 'UIKit', 'Foundation'
+
 end

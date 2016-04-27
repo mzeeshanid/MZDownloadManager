@@ -2,16 +2,16 @@
 //  MZDownloadModel.swift
 //  MZDownloadManager
 //
-//  Created by Hamid Ismail on 19/04/2016.
+//  Created by Muhammad Zeeshan on 19/04/2016.
 //  Copyright © 2016 ideamakerz. All rights reserved.
 //
 
 import UIKit
 
-enum TaskStatus: Int {
+public enum TaskStatus: Int {
     case Unknown, GettingInfo, Downloading, Paused, Failed
     
-    func description() -> String {
+    public func description() -> String {
         switch self {
         case .GettingInfo:
             return "GettingInfo"
@@ -27,24 +27,24 @@ enum TaskStatus: Int {
     }
 }
 
-class MZDownloadModel: NSObject {
+public class MZDownloadModel: NSObject {
     
-    var fileName: String!
-    var fileURL: String!
-    var status: String = TaskStatus.GettingInfo.description()
+    public var fileName: String!
+    public var fileURL: String!
+    public var status: String = TaskStatus.GettingInfo.description()
     
-    var file: (size: Float, unit: String)?
-    var downloadedFile: (size: Float, unit: String)?
+    public var file: (size: Float, unit: String)?
+    public var downloadedFile: (size: Float, unit: String)?
     
-    var remainingTime: (hours: Int, minutes: Int, seconds: Int)?
+    public var remainingTime: (hours: Int, minutes: Int, seconds: Int)?
     
-    var speed: (speed: Float, unit: String)?
+    public var speed: (speed: Float, unit: String)?
     
-    var progress: Float = 0
+    public var progress: Float = 0
     
-    var task: NSURLSessionDownloadTask?
+    public var task: NSURLSessionDownloadTask?
     
-    var startTime: NSDate?
+    public var startTime: NSDate?
     
     convenience init(fileName: String, fileURL: String) {
         self.init()

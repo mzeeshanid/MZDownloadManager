@@ -4,27 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>FBSnapshotTestCase.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MZDownloadManager-MZDownloadManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>MZDownloadManager.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Nimble-Snapshots.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Nimble.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -39,30 +24,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Quick.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0E359681996C9E927392436D5FB85B25</key>
+		<key>19B8BA764916E9DAAF4E4E661C31C930</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>20125091CC3468551E93D3946CDDF89C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>38B14AE5796F9BDBF4A217C8CE3F838D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>772A3FF3D8A39494464ADDC12B7096CF</key>
+		<key>1A86E2881266A5CA90642BE78304DD05</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,17 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7B7BD15A8CB5F16F8AA27B9095171A4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CFC68CD4F375E3E13FB8CB49051D6347</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FF61C7C740C1B196A3B33F37B77DBC68</key>
+		<key>CBA79B32517DCB2E03CFD043C08D1C51</key>
 		<dict>
 			<key>primary</key>
 			<true/>
