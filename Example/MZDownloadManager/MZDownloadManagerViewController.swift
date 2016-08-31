@@ -12,7 +12,7 @@ import MZDownloadManager
 let alertControllerViewTag: Int = 500
 
 class MZDownloadManagerViewController: UITableViewController {
-
+    
     var selectedIndexPath : NSIndexPath!
     
     lazy var downloadManager: MZDownloadManager = {
@@ -24,13 +24,13 @@ class MZDownloadManagerViewController: UITableViewController {
         
         let downloadmanager = MZDownloadManager(session: sessionIdentifer, delegate: self, completion: completion)
         return downloadmanager
-    }()
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -216,6 +216,21 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
     func downloadRequestDidFailedWithError(error: NSError, downloadModel: MZDownloadModel, index: Int) {
         self.safelyDismissAlertController()
         self.refreshCellForIndex(downloadModel, index: index)
+        
+        debugPrint("Error while downloading file: \(downloadModel.fileName)  Error: \(error)")
+    }
+    
+    //Oppotunity to handle destination does not exists error
+    //This delegate will be called on the session queue so handle it appropriately
+    func downloadRequestDestinationDoestNotExists(downloadModel: MZDownloadModel, index: Int, location: NSURL) {
+        let myDownloadPath = MZUtility.baseFilePath + "/Default folder"
+        if !NSFileManager.defaultManager().fileExistsAtPath(myDownloadPath) {
+            try! NSFileManager.defaultManager().createDirectoryAtPath(myDownloadPath, withIntermediateDirectories: true, attributes: nil)
+        }
+        let fileName = MZUtility.getUniqueFileNameWithPath((myDownloadPath as NSString).stringByAppendingPathComponent(downloadModel.fileName as String))
+        let path =  myDownloadPath + "/" + (fileName as String)
+        try! NSFileManager.defaultManager().moveItemAtURL(location, toURL: NSURL(fileURLWithPath: path))
+        debugPrint("Default folder path: \(myDownloadPath)")
     }
 }
 

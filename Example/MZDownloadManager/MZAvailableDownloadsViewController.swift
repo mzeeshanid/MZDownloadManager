@@ -10,22 +10,30 @@ import UIKit
 import MZDownloadManager
 
 class MZAvailableDownloadsViewController: UITableViewController {
-
+    
     var mzDownloadingViewObj    : MZDownloadManagerViewController?
     var availableDownloadsArray: [String] = []
+    
+    let myDownloadPath = MZUtility.baseFilePath + "/My Downloads"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        availableDownloadsArray.append("http://dl.dropbox.com/u/97700329/file1.mp4")
-        availableDownloadsArray.append("http://dl.dropbox.com/u/97700329/file2.mp4")
-        availableDownloadsArray.append("http://dl.dropbox.com/u/97700329/file3.mp4")
-        availableDownloadsArray.append("http://dl.dropbox.com/u/97700329/FileZilla_3.6.0.2_i686-apple-darwin9.app.tar.bz2")
-        availableDownloadsArray.append("http://dl.dropbox.com/u/97700329/GCDExample-master.zip")
+        if !NSFileManager.defaultManager().fileExistsAtPath(myDownloadPath) {
+            try! NSFileManager.defaultManager().createDirectoryAtPath(myDownloadPath, withIntermediateDirectories: true, attributes: nil)
+        }
+        debugPrint("custom download path: \(myDownloadPath)")
+
+        availableDownloadsArray.append("https://dl.dropboxusercontent.com/u/97700329/AlecrimCoreData-master.zip")
+        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/file1.mp4")
+        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/file2.mp4")
+        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/file3.mp4")
+        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/FileZilla_3.6.0.2_i686-apple-darwin9.app.tar.bz2")
+        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/GCDExample-master.zip")
         
         self.setUpDownloadingViewController()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -68,9 +76,12 @@ extension MZAvailableDownloadsViewController {
         
         let fileURL  : NSString = availableDownloadsArray[indexPath.row] as NSString
         var fileName : NSString = fileURL.lastPathComponent
-        fileName = MZUtility.getUniqueFileNameWithPath((MZUtility.baseFilePath as NSString).stringByAppendingPathComponent(fileName as String))
+        fileName = MZUtility.getUniqueFileNameWithPath((myDownloadPath as NSString).stringByAppendingPathComponent(fileName as String))
         
-        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
+        //Use it download at default path i.e document directory
+        
+        //        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
+        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!, destinationPath: myDownloadPath)
         
         availableDownloadsArray.removeAtIndex(indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)

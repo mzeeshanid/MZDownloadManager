@@ -46,10 +46,18 @@ public class MZDownloadModel: NSObject {
     
     public var startTime: NSDate?
     
-    convenience init(fileName: String, fileURL: String) {
+    private(set) public var destinationPath: String = ""
+    
+    private convenience init(fileName: String, fileURL: String) {
         self.init()
         
         self.fileName = fileName
         self.fileURL = fileURL
+    }
+    
+    convenience init(fileName: String, fileURL: String, destinationPath: String) {
+        self.init(fileName: fileName, fileURL: fileURL)
+        
+        self.destinationPath = destinationPath
     }
 }
