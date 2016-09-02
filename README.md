@@ -38,6 +38,25 @@ it, simply add the following line to your Podfile:
 pod "MZDownloadManager"
 ```
 
+## Update
+
+New helper functions added to support downloading at custom path. Example project is also updated about the usage.
+
+To download file at custom path you can use the following instance method of MZDownloadManager:
+    
+```public func addDownloadTask(fileName: String, fileURL: String, destinationPath: String)```
+      
+#### When download completes:
+    
+* It will check if the destination folder still exists then it will move the downloaded file at the specified destination and call success delegate method.
+* If destination folder does not exists, following delegate method will provide an opportunity to handle the downloaded file appropriately.
+
+```optional func downloadRequestDestinationDoestNotExists(downloadModel: MZDownloadModel, index: Int, location: NSURL)```
+
+* If the above delegate method is not implemented then it will just called the failure method.
+
+> Important: This delegate method will be called on the session's queue.
+
 ## Author
 
 Muhammad Zeeshan, mzeeshanid@yahoo.com
