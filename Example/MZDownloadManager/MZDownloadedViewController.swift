@@ -12,8 +12,8 @@ import MZDownloadManager
 class MZDownloadedViewController: UITableViewController {
     
     var downloadedFilesArray : [String] = []
-    var selectedIndexPath    : NSIndexPath?
-    var fileManger           : NSFileManager = NSFileManager.defaultManager()
+    var selectedIndexPath    : IndexPath?
+    var fileManger           : FileManager = FileManager.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +21,19 @@ class MZDownloadedViewController: UITableViewController {
         // Do any additional setup after loading the view.
 
         do {
-            let contentOfDir: [String] = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(MZUtility.baseFilePath as String)
-            downloadedFilesArray.appendContentsOf(contentOfDir)
+            let contentOfDir: [String] = try FileManager.default.contentsOfDirectory(atPath: MZUtility.baseFilePath as String)
+            downloadedFilesArray.append(contentsOf: contentOfDir)
             
-            let index = downloadedFilesArray.indexOf(".DS_Store")
+            let index = downloadedFilesArray.index(of: ".DS_Store")
             if let index = index {
-                downloadedFilesArray.removeAtIndex(index)
+                downloadedFilesArray.remove(at: index)
             }
             
         } catch let error as NSError {
             print("Error while getting directory content \(error)")
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: NSSelectorFromString("downloadFinishedNotification:"), name: MZUtility.DownloadCompletedNotif as String, object: nil)
+        NotificationCenter.default.addObserver(self, selector: NSSelectorFromString("downloadFinishedNotification:"), name: NSNotification.Name(rawValue: MZUtility.DownloadCompletedNotif as String), object: nil)
         
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MZDownloadedViewController.downloadFinishedNotification(_:)), name: DownloadCompletedNotif as String, object: nil)
     }
@@ -45,26 +45,26 @@ class MZDownloadedViewController: UITableViewController {
     
     // MARK: - NSNotification Methods -
     
-    func downloadFinishedNotification(notification : NSNotification) {
+    func downloadFinishedNotification(_ notification : Notification) {
         let fileName : NSString = notification.object as! NSString
         downloadedFilesArray.append(fileName.lastPathComponent)
-        tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
     }
 }
 
 //MARK: UITableViewDataSource Handler Extension
 
 extension MZDownloadedViewController {
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return downloadedFilesArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier : NSString = "DownloadedFileCell"
-        let cell : UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as UITableViewCell
+        let cell : UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier as String, for: indexPath) as UITableViewCell
         
-        cell.textLabel?.text = downloadedFilesArray[indexPath.row]
+        cell.textLabel?.text = downloadedFilesArray[(indexPath as NSIndexPath).row]
         
         return cell
     }
@@ -73,20 +73,20 @@ extension MZDownloadedViewController {
 //MARK: UITableViewDelegate Handler Extension
 
 extension MZDownloadedViewController {
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         selectedIndexPath = indexPath
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let fileName : NSString = downloadedFilesArray[indexPath.row] as NSString
-        let fileURL  : NSURL = NSURL(fileURLWithPath: (MZUtility.baseFilePath as NSString).stringByAppendingPathComponent(fileName as String))
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let fileName : NSString = downloadedFilesArray[(indexPath as NSIndexPath).row] as NSString
+        let fileURL  : URL = URL(fileURLWithPath: (MZUtility.baseFilePath as NSString).appendingPathComponent(fileName as String))
         
         do {
-            try fileManger.removeItemAtURL(fileURL)
-            downloadedFilesArray.removeAtIndex(indexPath.row)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            try fileManger.removeItem(at: fileURL)
+            downloadedFilesArray.remove(at: (indexPath as NSIndexPath).row)
+            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         } catch let error as NSError {
             debugPrint("Error while deleting file: \(error)")
         }

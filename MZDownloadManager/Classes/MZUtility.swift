@@ -8,45 +8,45 @@
 
 import UIKit
 
-public class MZUtility: NSObject {
+open class MZUtility: NSObject {
     
-    public static let DownloadCompletedNotif: String = {
+    open static let DownloadCompletedNotif: String = {
         return "com.MZDownloadManager.DownloadCompletedNotif"
     }()
     
-    public static let baseFilePath: String = {
-        return (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents") as String
+    open static let baseFilePath: String = {
+        return (NSHomeDirectory() as NSString).appendingPathComponent("Documents") as String
     }()
 
-    public class func getUniqueFileNameWithPath(filePath : NSString) -> NSString {
-        let fullFileName        : NSString = filePath.lastPathComponent
-        let fileName            : NSString = fullFileName.stringByDeletingPathExtension
-        let fileExtension       : NSString = fullFileName.pathExtension
+    open class func getUniqueFileNameWithPath(_ filePath : NSString) -> NSString {
+        let fullFileName        : NSString = filePath.lastPathComponent as NSString
+        let fileName            : NSString = fullFileName.deletingPathExtension as NSString
+        let fileExtension       : NSString = fullFileName.pathExtension as NSString
         var suggestedFileName   : NSString = fileName
         
         var isUnique            : Bool = false
         var fileNumber          : Int = 0
         
-        let fileManger          : NSFileManager = NSFileManager.defaultManager()
+        let fileManger          : FileManager = FileManager.default
         
         repeat {
             var fileDocDirectoryPath : NSString?
             
             if fileExtension.length > 0 {
-                fileDocDirectoryPath = "\(filePath.stringByDeletingLastPathComponent)/\(suggestedFileName).\(fileExtension)"
+                fileDocDirectoryPath = "\(filePath.deletingLastPathComponent)/\(suggestedFileName).\(fileExtension)" as NSString?
             } else {
-                fileDocDirectoryPath = "\(filePath.stringByDeletingLastPathComponent)/\(suggestedFileName)"
+                fileDocDirectoryPath = "\(filePath.deletingLastPathComponent)/\(suggestedFileName)" as NSString?
             }
             
-            let isFileAlreadyExists : Bool = fileManger.fileExistsAtPath(fileDocDirectoryPath! as String)
+            let isFileAlreadyExists : Bool = fileManger.fileExists(atPath: fileDocDirectoryPath! as String)
             
             if isFileAlreadyExists {
                 fileNumber += 1
-                suggestedFileName = "\(fileName)(\(fileNumber))"
+                suggestedFileName = "\(fileName)(\(fileNumber))" as NSString
             } else {
                 isUnique = true
                 if fileExtension.length > 0 {
-                    suggestedFileName = "\(suggestedFileName).\(fileExtension)"
+                    suggestedFileName = "\(suggestedFileName).\(fileExtension)" as NSString
                 }
             }
         
@@ -55,7 +55,7 @@ public class MZUtility: NSObject {
         return suggestedFileName
     }
     
-    public class func calculateFileSizeInUnit(contentLength : Int64) -> Float {
+    open class func calculateFileSizeInUnit(_ contentLength : Int64) -> Float {
         let dataLength : Float64 = Float64(contentLength)
         if dataLength >= (1024.0*1024.0*1024.0) {
             return Float(dataLength/(1024.0*1024.0*1024.0))
@@ -68,7 +68,7 @@ public class MZUtility: NSObject {
         }
     }
     
-    public class func calculateUnit(contentLength : Int64) -> NSString {
+    open class func calculateUnit(_ contentLength : Int64) -> NSString {
         if(contentLength >= (1024*1024*1024)) {
             return "GB"
         } else if contentLength >= (1024*1024) {
@@ -80,13 +80,13 @@ public class MZUtility: NSObject {
         }
     }
     
-    public class func addSkipBackupAttributeToItemAtURL(docDirectoryPath : NSString) -> Bool {
-        let url : NSURL = NSURL(fileURLWithPath: docDirectoryPath as String)
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(url.path!) {
+    open class func addSkipBackupAttributeToItemAtURL(_ docDirectoryPath : NSString) -> Bool {
+        let url : URL = URL(fileURLWithPath: docDirectoryPath as String)
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: url.path) {
             
             do {
-                try url.setResourceValue(NSNumber(bool: true), forKey: NSURLIsExcludedFromBackupKey)
+                try (url as NSURL).setResourceValue(NSNumber(value: true as Bool), forKey: URLResourceKey.isExcludedFromBackupKey)
                 return true
             } catch let error as NSError {
                 print("Error excluding \(url.lastPathComponent) from backup \(error)")
@@ -98,13 +98,13 @@ public class MZUtility: NSObject {
         }
     }
     
-    public class func getFreeDiskspace() -> Int64? {
-        let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    open class func getFreeDiskspace() -> Int64? {
+        let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let systemAttributes: AnyObject?
         do {
-            systemAttributes = try NSFileManager.defaultManager().attributesOfFileSystemForPath(documentDirectoryPath.last!)
-            let freeSize = systemAttributes?[NSFileSystemFreeSize] as? NSNumber
-            return freeSize?.longLongValue
+            systemAttributes = try FileManager.default.attributesOfFileSystem(forPath: documentDirectoryPath.last!) as AnyObject?
+            let freeSize = systemAttributes?[FileAttributeKey.systemFreeSize] as? NSNumber
+            return freeSize?.int64Value
         } catch let error as NSError {
             print("Error Obtaining System Memory Info: Domain = \(error.domain), Code = \(error.code)")
             return nil;

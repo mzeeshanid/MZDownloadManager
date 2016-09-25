@@ -9,17 +9,17 @@
 import UIKit
 
 public enum TaskStatus: Int {
-    case Unknown, GettingInfo, Downloading, Paused, Failed
+    case unknown, gettingInfo, downloading, paused, failed
     
     public func description() -> String {
         switch self {
-        case .GettingInfo:
+        case .gettingInfo:
             return "GettingInfo"
-        case .Downloading:
+        case .downloading:
             return "Downloading"
-        case .Paused:
+        case .paused:
             return "Paused"
-        case .Failed:
+        case .failed:
             return "Failed"
         default:
             return "Unknown"
@@ -27,28 +27,28 @@ public enum TaskStatus: Int {
     }
 }
 
-public class MZDownloadModel: NSObject {
+open class MZDownloadModel: NSObject {
     
-    public var fileName: String!
-    public var fileURL: String!
-    public var status: String = TaskStatus.GettingInfo.description()
+    open var fileName: String!
+    open var fileURL: String!
+    open var status: String = TaskStatus.gettingInfo.description()
     
-    public var file: (size: Float, unit: String)?
-    public var downloadedFile: (size: Float, unit: String)?
+    open var file: (size: Float, unit: String)?
+    open var downloadedFile: (size: Float, unit: String)?
     
-    public var remainingTime: (hours: Int, minutes: Int, seconds: Int)?
+    open var remainingTime: (hours: Int, minutes: Int, seconds: Int)?
     
-    public var speed: (speed: Float, unit: String)?
+    open var speed: (speed: Float, unit: String)?
     
-    public var progress: Float = 0
+    open var progress: Float = 0
     
-    public var task: NSURLSessionDownloadTask?
+    open var task: URLSessionDownloadTask?
     
-    public var startTime: NSDate?
+    open var startTime: Date?
     
-    private(set) public var destinationPath: String = ""
+    fileprivate(set) open var destinationPath: String = ""
     
-    private convenience init(fileName: String, fileURL: String) {
+    fileprivate convenience init(fileName: String, fileURL: String) {
         self.init()
         
         self.fileName = fileName

@@ -20,13 +20,13 @@ class MZDownloadingCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func updateCellForRowAtIndexPath(indexPath : NSIndexPath, downloadModel: MZDownloadModel) {
+    func updateCellForRowAtIndexPath(_ indexPath : IndexPath, downloadModel: MZDownloadModel) {
         
         self.lblTitle?.text = "File Title: \(downloadModel.fileName)"
         self.progressDownload?.progress = downloadModel.progress
@@ -35,13 +35,13 @@ class MZDownloadingCell: UITableViewCell {
         if downloadModel.progress == 1.0 {
             remainingTime = "Please wait..."
         } else if let _ = downloadModel.remainingTime {
-            if downloadModel.remainingTime?.hours > 0 {
+            if (downloadModel.remainingTime?.hours)! > 0 {
                 remainingTime = "\(downloadModel.remainingTime!.hours) Hours "
             }
-            if downloadModel.remainingTime?.minutes > 0 {
+            if (downloadModel.remainingTime?.minutes)! > 0 {
                 remainingTime = remainingTime + "\(downloadModel.remainingTime!.minutes) Min "
             }
-            if downloadModel.remainingTime?.seconds > 0 {
+            if (downloadModel.remainingTime?.seconds)! > 0 {
                 remainingTime = remainingTime + "\(downloadModel.remainingTime!.seconds) sec"
             }
         } else {
@@ -64,7 +64,7 @@ class MZDownloadingCell: UITableViewCell {
         }
         
         let detailLabelText = NSMutableString()
-        detailLabelText.appendFormat("File Size: \(fileSize)\nDownloaded: \(downloadedFileSize) (%.2f%%)\nSpeed: \(speed)\nTime Left: \(remainingTime)\nStatus: \(downloadModel.status)", downloadModel.progress * 100.0)
+        detailLabelText.appendFormat("File Size: \(fileSize)\nDownloaded: \(downloadedFileSize) (%.2f%%)\nSpeed: \(speed)\nTime Left: \(remainingTime)\nStatus: \(downloadModel.status)" as NSString, downloadModel.progress * 100.0)
         lblDetails?.text = detailLabelText as String
     }
 }
