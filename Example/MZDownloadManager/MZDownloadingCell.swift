@@ -28,7 +28,7 @@ class MZDownloadingCell: UITableViewCell {
     
     func updateCellForRowAtIndexPath(_ indexPath : IndexPath, downloadModel: MZDownloadModel) {
         
-        self.lblTitle?.text = "File Title: \(downloadModel.fileName)"
+        self.lblTitle?.text = "File Title: \(downloadModel.fileName!)"
         self.progressDownload?.progress = downloadModel.progress
         
         var remainingTime: String = ""
