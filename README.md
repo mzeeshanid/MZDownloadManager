@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/MZDownloadManager.svg?style=flat)](http://cocoapods.org/pods/MZDownloadManager)
 [![Platform](https://img.shields.io/cocoapods/p/MZDownloadManager.svg?style=flat)](http://cocoapods.org/pods/MZDownloadManager)
 
-![mzdownload manager hero](https://cloud.githubusercontent.com/assets/2767152/3459842/0c40fe66-0211-11e4-90d8-d8942c8f8651.png)
+![mzdownload manager hero](https://cloud.githubusercontent.com/assets/2767152/18860547/b7d2b1d8-8497-11e6-859a-92d8c54818f9.jpg)
 
 ## Features
 
@@ -26,6 +26,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
++ Xcode 8
 + Minimum deployment target is iOS 8.
 + For resuming downloads server must have resuming support.
 
