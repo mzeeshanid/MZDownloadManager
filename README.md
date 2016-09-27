@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/MZDownloadManager.svg?style=flat)](http://cocoapods.org/pods/MZDownloadManager)
 [![Platform](https://img.shields.io/cocoapods/p/MZDownloadManager.svg?style=flat)](http://cocoapods.org/pods/MZDownloadManager)
 
-![mzdownload manager hero](https://cloud.githubusercontent.com/assets/2767152/18860547/b7d2b1d8-8497-11e6-859a-92d8c54818f9.jpg)
+![mzdownload manager hero](https://cloud.githubusercontent.com/assets/2767152/18860606/655c21ea-8498-11e6-9bf9-05b5405d119a.jpg)
 
 ## Features
 
