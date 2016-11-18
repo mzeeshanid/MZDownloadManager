@@ -27,7 +27,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## Requirements
 
 + Xcode 8
-+ Minimum deployment target is iOS 8.
++ Minimum deployment target is iOS 9.
 + For resuming downloads server must have resuming support.
 
 ## Installation
