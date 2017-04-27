@@ -1,11 +1,11 @@
 platform :ios, '9.0'
 use_frameworks!
 
-target 'MZDownloadManager_Example', :exclusive => true do
+target 'MZDownloadManager_Example' do
   pod 'MZDownloadManager', :path => '../'
 end
 
-target 'MZDownloadManager_Tests', :exclusive => true do
+target 'MZDownloadManager_Tests' do
   pod 'MZDownloadManager', :path => '../'
 
   

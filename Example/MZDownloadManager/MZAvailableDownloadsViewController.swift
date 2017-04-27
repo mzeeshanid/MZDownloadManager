@@ -24,12 +24,12 @@ class MZAvailableDownloadsViewController: UITableViewController {
         }
         debugPrint("custom download path: \(myDownloadPath)")
 
-        availableDownloadsArray.append("https://dl.dropboxusercontent.com/u/97700329/AlecrimCoreData-master.zip")
-        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/file1.mp4")
-        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/file2.mp4")
-        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/file3.mp4")
-        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/FileZilla_3.6.0.2_i686-apple-darwin9.app.tar.bz2")
-        availableDownloadsArray.append("https://dl.dropbox.com/u/97700329/GCDExample-master.zip")
+        availableDownloadsArray.append("https://www.dropbox.com/s/yrura6qlcgcwpp4/file1.mp4?dl=1")
+        availableDownloadsArray.append("https://www.dropbox.com/s/y9kgs6caztxxjdh/AlecrimCoreData-master.zip?dl=1")
+        availableDownloadsArray.append("https://www.dropbox.com/s/73ymbx6icoiqus9/file2.mp4?dl=1")
+        availableDownloadsArray.append("https://www.dropbox.com/s/4pw4jwiju0eon6r/file3.mp4?dl=1")
+        availableDownloadsArray.append("https://www.dropbox.com/s/2bmbk8id7nseirq/file4.mp4?dl=1")
+        availableDownloadsArray.append("https://www.dropbox.com/s/cw7wfyaic9rtzwd/GCDExample-master.zip?dl=1")
         
         self.setUpDownloadingViewController()
     }
@@ -79,9 +79,9 @@ extension MZAvailableDownloadsViewController {
         fileName = MZUtility.getUniqueFileNameWithPath((myDownloadPath as NSString).appendingPathComponent(fileName as String) as NSString)
         
         //Use it download at default path i.e document directory
+//        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL as String)
         
-        //        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
-        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL.addingPercentEscapes(using: String.Encoding.utf8.rawValue)!, destinationPath: myDownloadPath)
+        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL as String, destinationPath: myDownloadPath)
         
         availableDownloadsArray.remove(at: (indexPath as NSIndexPath).row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.right)

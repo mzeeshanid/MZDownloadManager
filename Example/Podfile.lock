@@ -1,5 +1,5 @@
 PODS:
-  - MZDownloadManager (3.0)
+  - MZDownloadManager (3.2)
 
 DEPENDENCIES:
   - MZDownloadManager (from `../`)
@@ -9,6 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  MZDownloadManager: fcb5e609595e520ca07192463c60cac61d752279
+  MZDownloadManager: 7ecad4fe503ee9eeb03b0bbbfb4de1e1d932bfc0
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 5d1b65c18daced252a92b00cff8468d902a37fe7
+
+COCOAPODS: 1.2.1

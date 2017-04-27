@@ -1,6 +1,6 @@
 {
   "name": "MZDownloadManager",
-  "version": "3.0",
+  "version": "3.2",
   "summary": "NSURLSession based download manager.",
   "description": "Download large files even in background, download multiple files, resume interrupted downloads.",
   "homepage": "https://github.com/mzeeshanid/MZDownloadManager",
@@ -11,18 +11,13 @@
   },
   "source": {
     "git": "https://github.com/mzeeshanid/MZDownloadManager.git",
-    "tag": "3.0"
+    "tag": "3.2"
   },
   "social_media_url": "https://twitter.com/mzeeshanid",
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "source_files": "MZDownloadManager/Classes/**/*",
-  "resource_bundles": {
-    "MZDownloadManager": [
-      "MZDownloadManager/Assets/*.png"
-    ]
-  },
   "frameworks": [
     "UIKit",
     "Foundation"

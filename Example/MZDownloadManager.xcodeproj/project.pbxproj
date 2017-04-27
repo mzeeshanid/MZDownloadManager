@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53AAE0F994BE1AFE7FA9D938 /* Pods_MZDownloadManager_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB78507FD5207D206E639604 /* Pods_MZDownloadManager_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		6B21BACB8F6A9117BFB7B6BF /* Pods_MZDownloadManager_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40284F26FCE1CE18BAF7238D /* Pods_MZDownloadManager_Tests.framework */; };
-		8208FD4CB2405E104BEBCE9A /* Pods_MZDownloadManager_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385A1C2D3DAC2AD5E85D75B8 /* Pods_MZDownloadManager_Example.framework */; };
+		BDFDFB8F337AD75144445FF5 /* Pods_MZDownloadManager_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABB240B636E5D780AF2CB8D /* Pods_MZDownloadManager_Tests.framework */; };
 		DAEEB83D1CD095D800D97E0F /* MZDownloadManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEEB8391CD095D800D97E0F /* MZDownloadManagerViewController.swift */; };
 		DAEEB83E1CD095D800D97E0F /* MZDownloadedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEEB83A1CD095D800D97E0F /* MZDownloadedViewController.swift */; };
 		DAEEB83F1CD095D800D97E0F /* MZAvailableDownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEEB83B1CD095D800D97E0F /* MZAvailableDownloadsViewController.swift */; };
@@ -31,11 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3402B84E5AE3FCBDDFE249FD /* Pods-MZDownloadManager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZDownloadManager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MZDownloadManager_Tests/Pods-MZDownloadManager_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		336C1BFB39C12DCD631C8972 /* Pods-MZDownloadManager_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZDownloadManager_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZDownloadManager_Tests/Pods-MZDownloadManager_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		361494B7688CE6910A56DE0E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		385A1C2D3DAC2AD5E85D75B8 /* Pods_MZDownloadManager_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZDownloadManager_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		40284F26FCE1CE18BAF7238D /* Pods_MZDownloadManager_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZDownloadManager_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4541563FA7CBB2C425292303 /* Pods-MZDownloadManager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZDownloadManager_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZDownloadManager_Example/Pods-MZDownloadManager_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* MZDownloadManager_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZDownloadManager_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,14 +42,17 @@
 		607FACE51AFB9204008FA782 /* MZDownloadManager_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MZDownloadManager_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		AA8D7173F72033000D90982B /* Pods-MZDownloadManager_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZDownloadManager_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZDownloadManager_Tests/Pods-MZDownloadManager_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		6ABB240B636E5D780AF2CB8D /* Pods_MZDownloadManager_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZDownloadManager_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9469F0FF719FEE27575D205D /* Pods-MZDownloadManager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZDownloadManager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MZDownloadManager_Tests/Pods-MZDownloadManager_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B0C5B0061141AF83B067D900 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		B51D334CEF6B3A27FF28AF08 /* Pods-MZDownloadManager_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZDownloadManager_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MZDownloadManager_Example/Pods-MZDownloadManager_Example.release.xcconfig"; sourceTree = "<group>"; };
+		BB78507FD5207D206E639604 /* Pods_MZDownloadManager_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZDownloadManager_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD52F53EB707DF343DC5FCBE /* MZDownloadManager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MZDownloadManager.podspec; path = ../MZDownloadManager.podspec; sourceTree = "<group>"; };
-		C6DBB36766DA0D485C070CC5 /* Pods-MZDownloadManager_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZDownloadManager_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MZDownloadManager_Example/Pods-MZDownloadManager_Example.release.xcconfig"; sourceTree = "<group>"; };
 		DAEEB8391CD095D800D97E0F /* MZDownloadManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadManagerViewController.swift; sourceTree = "<group>"; };
 		DAEEB83A1CD095D800D97E0F /* MZDownloadedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadedViewController.swift; sourceTree = "<group>"; };
 		DAEEB83B1CD095D800D97E0F /* MZAvailableDownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZAvailableDownloadsViewController.swift; sourceTree = "<group>"; };
 		DAEEB83C1CD095D800D97E0F /* MZDownloadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadingCell.swift; sourceTree = "<group>"; };
+		E729847E5A63CEA772D0AD2A /* Pods-MZDownloadManager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZDownloadManager_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZDownloadManager_Example/Pods-MZDownloadManager_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8208FD4CB2405E104BEBCE9A /* Pods_MZDownloadManager_Example.framework in Frameworks */,
+				53AAE0F994BE1AFE7FA9D938 /* Pods_MZDownloadManager_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,20 +68,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B21BACB8F6A9117BFB7B6BF /* Pods_MZDownloadManager_Tests.framework in Frameworks */,
+				BDFDFB8F337AD75144445FF5 /* Pods_MZDownloadManager_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5447A31B1005A3EB2F46DFDC /* Frameworks */ = {
+		37935EAA74D7B750505573CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				385A1C2D3DAC2AD5E85D75B8 /* Pods_MZDownloadManager_Example.framework */,
-				40284F26FCE1CE18BAF7238D /* Pods_MZDownloadManager_Tests.framework */,
+				BB78507FD5207D206E639604 /* Pods_MZDownloadManager_Example.framework */,
+				6ABB240B636E5D780AF2CB8D /* Pods_MZDownloadManager_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5C9FA4F5FF40DE0F82C0DB68 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E729847E5A63CEA772D0AD2A /* Pods-MZDownloadManager_Example.debug.xcconfig */,
+				B51D334CEF6B3A27FF28AF08 /* Pods-MZDownloadManager_Example.release.xcconfig */,
+				336C1BFB39C12DCD631C8972 /* Pods-MZDownloadManager_Tests.debug.xcconfig */,
+				9469F0FF719FEE27575D205D /* Pods-MZDownloadManager_Tests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -91,8 +102,8 @@
 				607FACD21AFB9204008FA782 /* Example for MZDownloadManager */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				68587276F0ECD7393186D965 /* Pods */,
-				5447A31B1005A3EB2F46DFDC /* Frameworks */,
+				5C9FA4F5FF40DE0F82C0DB68 /* Pods */,
+				37935EAA74D7B750505573CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,17 +168,6 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		68587276F0ECD7393186D965 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4541563FA7CBB2C425292303 /* Pods-MZDownloadManager_Example.debug.xcconfig */,
-				C6DBB36766DA0D485C070CC5 /* Pods-MZDownloadManager_Example.release.xcconfig */,
-				AA8D7173F72033000D90982B /* Pods-MZDownloadManager_Tests.debug.xcconfig */,
-				3402B84E5AE3FCBDDFE249FD /* Pods-MZDownloadManager_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,12 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "MZDownloadManager_Example" */;
 			buildPhases = (
-				A4E7028A922D7B562BA69D5B /* Check Pods Manifest.lock */,
+				F2C0F8E19B5F125A0F9FCC12 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				5012165A31080AC8DA35E50B /* Embed Pods Frameworks */,
-				B9A39F26DB5EE3F347DB546B /* Copy Pods Resources */,
+				5819E3F05A84EE72847CEC62 /* [CP] Embed Pods Frameworks */,
+				576B8A593C7DECC922324EAD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,12 +195,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "MZDownloadManager_Tests" */;
 			buildPhases = (
-				9219F3F439DA648C7508ABEB /* Check Pods Manifest.lock */,
+				70103CAFC4E0D8E18CD8C24A /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				226D79A4E350F0846246291B /* Embed Pods Frameworks */,
-				83ABBECBB27C5BC666D253B8 /* Copy Pods Resources */,
+				D114A63C1132E515DC1E2841 /* [CP] Embed Pods Frameworks */,
+				AF76B33226368C09D50BF0AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,12 +219,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = BQTXXBH526;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -234,6 +236,7 @@
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -278,29 +281,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		226D79A4E350F0846246291B /* Embed Pods Frameworks */ = {
+		576B8A593C7DECC922324EAD /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZDownloadManager_Tests/Pods-MZDownloadManager_Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZDownloadManager_Example/Pods-MZDownloadManager_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5012165A31080AC8DA35E50B /* Embed Pods Frameworks */ = {
+		5819E3F05A84EE72847CEC62 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,14 +311,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZDownloadManager_Example/Pods-MZDownloadManager_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		83ABBECBB27C5BC666D253B8 /* Copy Pods Resources */ = {
+		70103CAFC4E0D8E18CD8C24A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AF76B33226368C09D50BF0AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,49 +341,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZDownloadManager_Tests/Pods-MZDownloadManager_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9219F3F439DA648C7508ABEB /* Check Pods Manifest.lock */ = {
+		D114A63C1132E515DC1E2841 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZDownloadManager_Tests/Pods-MZDownloadManager_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A4E7028A922D7B562BA69D5B /* Check Pods Manifest.lock */ = {
+		F2C0F8E19B5F125A0F9FCC12 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B9A39F26DB5EE3F347DB546B /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZDownloadManager_Example/Pods-MZDownloadManager_Example-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -510,51 +513,62 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4541563FA7CBB2C425292303 /* Pods-MZDownloadManager_Example.debug.xcconfig */;
+			baseConfigurationReference = E729847E5A63CEA772D0AD2A /* Pods-MZDownloadManager_Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BQTXXBH526;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = MZDownloadManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.MZDownloadManager-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4f660105-6d56-4006-8658-e204e53ee8a1";
+				PROVISIONING_PROFILE_SPECIFIER = WildCard_Dev;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6DBB36766DA0D485C070CC5 /* Pods-MZDownloadManager_Example.release.xcconfig */;
+			baseConfigurationReference = B51D334CEF6B3A27FF28AF08 /* Pods-MZDownloadManager_Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BQTXXBH526;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = MZDownloadManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.MZDownloadManager-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4f660105-6d56-4006-8658-e204e53ee8a1";
+				PROVISIONING_PROFILE_SPECIFIER = WildCard_Dev;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA8D7173F72033000D90982B /* Pods-MZDownloadManager_Tests.debug.xcconfig */;
+			baseConfigurationReference = 336C1BFB39C12DCD631C8972 /* Pods-MZDownloadManager_Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MZDownloadManager_Example.app/MZDownloadManager_Example";
 			};
@@ -562,15 +576,18 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3402B84E5AE3FCBDDFE249FD /* Pods-MZDownloadManager_Tests.release.xcconfig */;
+			baseConfigurationReference = 9469F0FF719FEE27575D205D /* Pods-MZDownloadManager_Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MZDownloadManager_Example.app/MZDownloadManager_Example";
 			};
