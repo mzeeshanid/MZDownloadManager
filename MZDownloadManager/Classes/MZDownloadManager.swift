@@ -349,8 +349,16 @@ extension MZDownloadManager {
     
     public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String) {
         
-        let url = URL(string: fileURL as String)!
+        let url = URL(string: fileURL)!
         let request = URLRequest(url: url)
+        addDownloadTask(fileName, request: request, destinationPath: destinationPath)
+        
+    }
+    
+    public func addDownloadTask(_ fileName: String, request: URLRequest, destinationPath: String) {
+        
+        let url = request.url!
+        let fileURL = url.absoluteString
         
         let downloadTask = sessionManager.downloadTask(with: request)
         downloadTask.taskDescription = [fileName, fileURL, destinationPath].joined(separator: ",")
