@@ -218,8 +218,8 @@ extension MZDownloadManager: URLSessionDelegate {
         for (index, downloadModel) in downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
                 let fileName = downloadModel.fileName as NSString
-                let basePath = downloadModel.destinationPath == "" ? MZUtility.baseFilePath : downloadModel.destinationPath
-                let destinationPath = (basePath as NSString).appendingPathComponent(fileName as String)
+                let basePath = downloadModel.destinationBasePath
+                let destinationPath = downloadModel.destinationFilePath
                 
                 let fileManager : FileManager = FileManager.default
                 

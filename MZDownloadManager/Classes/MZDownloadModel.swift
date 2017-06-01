@@ -48,6 +48,14 @@ open class MZDownloadModel: NSObject {
     
     open var overwriteable: Bool = false
     
+    open var destinationBasePath: String {
+        return self.destinationPath == "" ? MZUtility.baseFilePath : self.destinationPath
+    }
+    
+    open var destinationFilePath: String {
+        return  (destinationBasePath as NSString).appendingPathComponent(fileName)
+    }
+    
     fileprivate(set) open var destinationPath: String = ""
     
     fileprivate convenience init(fileName: String, fileURL: String) {
