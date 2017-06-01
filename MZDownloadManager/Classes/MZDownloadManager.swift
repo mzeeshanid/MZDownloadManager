@@ -230,7 +230,7 @@ extension MZDownloadManager: URLSessionDelegate {
                     
                     do {
                         if downloadModel.overwriteable {
-                            try _ = fileManager.replaceItemAt(location, withItemAt: fileURL)
+                            try _ = fileManager.replaceItemAt(fileURL, withItemAt: location)
                         } else {
                             try fileManager.moveItem(at: location, to: fileURL)
                         }
