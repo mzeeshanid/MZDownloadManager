@@ -355,11 +355,11 @@ extension MZDownloadManager {
         
         let url = URL(string: fileURL)!
         let request = URLRequest(url: url)
-        addDownloadTask(fileName, request: request, destinationPath: destinationPath)
+        addDownloadTask(fileName, request: request, destinationPath: destinationPath, overwriteable: overwriteable)
         
     }
     
-    public func addDownloadTask(_ fileName: String, request: URLRequest, destinationPath: String) {
+    public func addDownloadTask(_ fileName: String, request: URLRequest, destinationPath: String, overwriteable: Bool = false) {
         
         let url = request.url!
         let fileURL = url.absoluteString
