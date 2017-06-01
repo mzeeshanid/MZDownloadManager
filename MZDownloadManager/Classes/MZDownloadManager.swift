@@ -224,16 +224,12 @@ extension MZDownloadManager: URLSessionDelegate {
                 let fileManager : FileManager = FileManager.default
                 
                 //If all set just move downloaded file to the destination
-                if fileManager.fileExists(atPath: basePath)  {
+                if fileManager.fileExists(atPath: basePath) {
                     let fileURL = URL(fileURLWithPath: destinationPath as String)
                     debugPrint("directory path = \(destinationPath)")
                     
                     do {
-                        if downloadModel.overwriteable {
-                            try _ = fileManager.replaceItemAt(location, withItemAt: fileURL)
-                        } else {
-                            try fileManager.moveItem(at: location, to: fileURL)
-                        }
+                        try fileManager.moveItem(at: location, to: fileURL)
                     } catch let error as NSError {
                         debugPrint("Error while moving downloaded file to destination path:\(error)")
                         DispatchQueue.main.async(execute: { () -> Void in
@@ -351,7 +347,7 @@ extension MZDownloadManager: URLSessionDelegate {
 
 extension MZDownloadManager {
     
-    public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String, overwriteable: Bool = false) {
+    public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String) {
         
         let url = URL(string: fileURL)!
         let request = URLRequest(url: url)
@@ -374,13 +370,12 @@ extension MZDownloadManager {
         downloadModel.startTime = Date()
         downloadModel.status = TaskStatus.downloading.description()
         downloadModel.task = downloadTask
-        downloadModel.overwriteable = overwriteable
         
         downloadingArray.append(downloadModel)
         delegate?.downloadRequestStarted?(downloadModel, index: downloadingArray.count - 1)
     }
     
-    public func addDownloadTask(_ fileName: String, fileURL: String, overwriteable: Bool = false) {
+    public func addDownloadTask(_ fileName: String, fileURL: String) {
         addDownloadTask(fileName, fileURL: fileURL, destinationPath: "")
     }
     
