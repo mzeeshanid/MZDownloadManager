@@ -176,10 +176,7 @@ extension MZDownloadManager: URLSessionDelegate {
         self.downloadingArrayLock.lock()
         for (index, downloadModel) in self.downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
-                print("#1", index, self.downloadingArray.count)
                 DispatchQueue.main.async(execute: { () -> Void in
-                    print("#2", index, self.downloadingArray.count)
-
                     let receivedBytesCount = Double(downloadTask.countOfBytesReceived)
                     let totalBytesCount = Double(downloadTask.countOfBytesExpectedToReceive)
                     let progress = Float(receivedBytesCount / totalBytesCount)
