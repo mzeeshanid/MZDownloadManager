@@ -209,9 +209,14 @@ extension MZDownloadManager: URLSessionDelegate {
                     downloadModel.speed = (speedSize, speedUnit as String)
                     downloadModel.progress = progress
 
-                    self.downloadingArray[index] = downloadModel
+                    self.downloadingArrayLock.lock()
+                    let index2 = self.downloadingArray.index(where: { (cmp) -> Bool in
+                        return cmp.task?.isEqual(downloadTask) ?? false
+                    })!
+                    self.downloadingArray[index2] = downloadModel
+                    self.downloadingArrayLock.unlock()
                     
-                    self.delegate?.downloadRequestDidUpdateProgress(downloadModel, index: index)
+                    self.delegate?.downloadRequestDidUpdateProgress(downloadModel, index: index2)
                 })
                 break
             }
