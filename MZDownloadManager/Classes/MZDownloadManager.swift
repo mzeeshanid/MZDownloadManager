@@ -121,7 +121,9 @@ extension MZDownloadManager {
         let downloadTasks = self.downloadTasks()
         
         for downloadTask in downloadTasks {
-            let taskDescComponents: [String] = downloadTask.taskDescription!.components(separatedBy: ",")
+          guard let taskDescComponents: [String] = downloadTask.taskDescription?.components(separatedBy: ",") else {
+                continue
+            }
             let fileName = taskDescComponents[TaskDescFileNameIndex]
             let fileURL = taskDescComponents[TaskDescFileURLIndex]
             let destinationPath = taskDescComponents[TaskDescFileDestinationIndex]
