@@ -176,7 +176,7 @@ extension MZDownloadManager: URLSessionDelegate {
     func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
 
         self.downloadingArrayLock.lock()
-        for (index, downloadModel) in self.downloadingArray.enumerated() {
+        for (_, downloadModel) in self.downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
                 DispatchQueue.main.async(execute: { () -> Void in
                     let receivedBytesCount = Double(downloadTask.countOfBytesReceived)
