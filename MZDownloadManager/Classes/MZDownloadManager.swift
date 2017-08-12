@@ -73,7 +73,8 @@ open class MZDownloadManager: NSObject {
     fileprivate let TaskDescFileDestinationIndex = 2
     
     fileprivate weak var delegate: MZDownloadManagerDelegate?
-    
+
+    fileprivate let downloadingArrayLock = NSLock()
     open var downloadingArray: [MZDownloadModel] = []
     
     public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate) {
@@ -120,7 +121,9 @@ extension MZDownloadManager {
         let downloadTasks = self.downloadTasks()
         
         for downloadTask in downloadTasks {
-            let taskDescComponents: [String] = downloadTask.taskDescription!.components(separatedBy: ",")
+          guard let taskDescComponents: [String] = downloadTask.taskDescription?.components(separatedBy: ",") else {
+                continue
+            }
             let fileName = taskDescComponents[TaskDescFileNameIndex]
             let fileURL = taskDescComponents[TaskDescFileURLIndex]
             let destinationPath = taskDescComponents[TaskDescFileDestinationIndex]
@@ -128,7 +131,8 @@ extension MZDownloadManager {
             let downloadModel = MZDownloadModel.init(fileName: fileName, fileURL: fileURL, destinationPath: destinationPath)
             downloadModel.task = downloadTask
             downloadModel.startTime = Date()
-            
+
+            self.downloadingArrayLock.lock()
             if downloadTask.state == .running {
                 downloadModel.status = TaskStatus.downloading.description()
                 downloadingArray.append(downloadModel)
@@ -138,6 +142,7 @@ extension MZDownloadManager {
             } else {
                 downloadModel.status = TaskStatus.failed.description()
             }
+            self.downloadingArrayLock.unlock()
         }
     }
     
@@ -169,10 +174,11 @@ extension MZDownloadManager {
 extension MZDownloadManager: URLSessionDelegate {
     
     func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        for (index, downloadModel) in self.downloadingArray.enumerated() {
+
+        self.downloadingArrayLock.lock()
+        for (_, downloadModel) in self.downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
                 DispatchQueue.main.async(execute: { () -> Void in
-                    
                     let receivedBytesCount = Double(downloadTask.countOfBytesReceived)
                     let totalBytesCount = Double(downloadTask.countOfBytesExpectedToReceive)
                     let progress = Float(receivedBytesCount / totalBytesCount)
@@ -204,17 +210,24 @@ extension MZDownloadManager: URLSessionDelegate {
                     downloadModel.downloadedFile = (downloadedFileSize, downloadedSizeUnit as String)
                     downloadModel.speed = (speedSize, speedUnit as String)
                     downloadModel.progress = progress
+
+                    self.downloadingArrayLock.lock()
+                    let index2 = self.downloadingArray.index(where: { (cmp) -> Bool in
+                        return cmp.task?.isEqual(downloadTask) ?? false
+                    })!
+                    self.downloadingArray[index2] = downloadModel
+                    self.downloadingArrayLock.unlock()
                     
-                    self.downloadingArray[index] = downloadModel
-                    
-                    self.delegate?.downloadRequestDidUpdateProgress(downloadModel, index: index)
+                    self.delegate?.downloadRequestDidUpdateProgress(downloadModel, index: index2)
                 })
                 break
             }
         }
+        self.downloadingArrayLock.unlock()
     }
     
     func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingToURL location: URL) {
+        self.downloadingArrayLock.lock()
         for (index, downloadModel) in downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
                 let fileName = downloadModel.fileName as NSString
@@ -253,6 +266,7 @@ extension MZDownloadManager: URLSessionDelegate {
                 break
             }
         }
+        self.downloadingArrayLock.unlock()
     }
     
     func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
@@ -283,12 +297,15 @@ extension MZDownloadManager: URLSessionDelegate {
                 
                 newTask.taskDescription = downloadTask.taskDescription
                 downloadModel.task = newTask
-                
+
+                self.downloadingArrayLock.lock()
                 self.downloadingArray.append(downloadModel)
+                self.downloadingArrayLock.unlock()
                 
                 self.delegate?.downloadRequestDidPopulatedInterruptedTasks(self.downloadingArray)
                 
             } else {
+                self.downloadingArrayLock.lock()
                 for(index, object) in self.downloadingArray.enumerated() {
                     let downloadModel = object
                     if task.isEqual(downloadModel.task) {
@@ -327,6 +344,7 @@ extension MZDownloadManager: URLSessionDelegate {
                         break;
                     }
                 }
+                self.downloadingArrayLock.unlock()
             }
         }
     }
@@ -356,14 +374,17 @@ extension MZDownloadManager {
         downloadTask.taskDescription = [fileName, fileURL, destinationPath].joined(separator: ",")
         downloadTask.resume()
         
-        debugPrint("session manager:\(sessionManager) url:\(url) request:\(request)")
+        //debugPrint("session manager:\(sessionManager) url:\(url) request:\(request)")
         
         let downloadModel = MZDownloadModel.init(fileName: fileName, fileURL: fileURL, destinationPath: destinationPath)
         downloadModel.startTime = Date()
         downloadModel.status = TaskStatus.downloading.description()
         downloadModel.task = downloadTask
-        
+
+        self.downloadingArrayLock.lock()
         downloadingArray.append(downloadModel)
+        self.downloadingArrayLock.unlock()
+
         delegate?.downloadRequestStarted?(downloadModel, index: downloadingArray.count - 1)
     }
     
