@@ -1,0 +1,301 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "TaskStatus"
+- "MZDownloadModel"
+provides-nominal:
+- "17MZDownloadManager10TaskStatusO"
+- "17MZDownloadManager0A5ModelC"
+provides-member:
+- ["17MZDownloadManager10TaskStatusO", ""]
+- ["17MZDownloadManager0A5ModelC", ""]
+provides-dynamic-lookup:
+- "destinationPath"
+- "fileName"
+- "fileURL"
+- "progress"
+- "startTime"
+- "status"
+- "task"
+depends-top-level:
+- "=="
+- "AssignmentPrecedence"
+- "Date"
+- "Float"
+- "Int"
+- "MZDownloadModel"
+- "NSObject"
+- "String"
+- "StringLiteralType"
+- "TaskStatus"
+- "URLSessionDownloadTask"
+- !private "~="
+depends-member:
+- ["s23BidirectionalCollectionP", "init"]
+- !private ["s13BinaryIntegerP", "hashValue"]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- ["s7CVarArgP", "TaskStatus"]
+- !private ["s7CVarArgP", "destinationPath"]
+- !private ["s7CVarArgP", "fileName"]
+- !private ["s7CVarArgP", "fileURL"]
+- !private ["s7CVarArgP", "hashValue"]
+- ["s7CVarArgP", "init"]
+- ["s7CVarArgP", ""]
+- ["s10CollectionP", "init"]
+- !private ["s10ComparableP", "hashValue"]
+- ["s10ComparableP", "init"]
+- ["s28CustomDebugStringConvertibleP", "TaskStatus"]
+- !private ["s28CustomDebugStringConvertibleP", "destinationPath"]
+- !private ["s28CustomDebugStringConvertibleP", "fileName"]
+- !private ["s28CustomDebugStringConvertibleP", "fileURL"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s29CustomPlaygroundQuickLookableP", "_getBuiltinLogicValue"]
+- !private ["s29CustomPlaygroundQuickLookableP", "hashValue"]
+- ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s17CustomReflectableP", "_getBuiltinLogicValue"]
+- !private ["s17CustomReflectableP", "hashValue"]
+- ["s17CustomReflectableP", "init"]
+- ["s23CustomStringConvertibleP", "TaskStatus"]
+- !private ["s23CustomStringConvertibleP", "_getBuiltinLogicValue"]
+- !private ["s23CustomStringConvertibleP", "destinationPath"]
+- !private ["s23CustomStringConvertibleP", "fileName"]
+- !private ["s23CustomStringConvertibleP", "fileURL"]
+- !private ["s23CustomStringConvertibleP", "hashValue"]
+- ["s23CustomStringConvertibleP", "init"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s9DecodableP", "_getBuiltinLogicValue"]
+- !private ["s9DecodableP", "hashValue"]
+- ["s9DecodableP", "init"]
+- !private ["s9EncodableP", "_getBuiltinLogicValue"]
+- !private ["s9EncodableP", "hashValue"]
+- ["s9EncodableP", "init"]
+- ["s9EquatableP", "RawValue"]
+- ["s9EquatableP", "TaskStatus"]
+- !private ["s9EquatableP", "_getBuiltinLogicValue"]
+- ["s9EquatableP", "description"]
+- !private ["s9EquatableP", "destinationPath"]
+- ["s9EquatableP", "downloading"]
+- ["s9EquatableP", "failed"]
+- !private ["s9EquatableP", "fileName"]
+- !private ["s9EquatableP", "fileURL"]
+- ["s9EquatableP", "gettingInfo"]
+- ["s9EquatableP", "hashValue"]
+- ["s9EquatableP", "init"]
+- ["s9EquatableP", "paused"]
+- ["s9EquatableP", "rawValue"]
+- ["s9EquatableP", ""]
+- !private ["s27ExpressibleByBooleanLiteralP", "_getBuiltinLogicValue"]
+- ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s27ExpressibleByIntegerLiteralP", "hashValue"]
+- ["s26ExpressibleByStringLiteralP", "init"]
+- ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s17FixedWidthIntegerP", "hashValue"]
+- ["s8HashableP", "RawValue"]
+- ["s8HashableP", "TaskStatus"]
+- !private ["s8HashableP", "_getBuiltinLogicValue"]
+- ["s8HashableP", "description"]
+- !private ["s8HashableP", "destinationPath"]
+- ["s8HashableP", "downloading"]
+- ["s8HashableP", "failed"]
+- !private ["s8HashableP", "fileName"]
+- !private ["s8HashableP", "fileURL"]
+- ["s8HashableP", "gettingInfo"]
+- ["s8HashableP", "hashValue"]
+- ["s8HashableP", "init"]
+- ["s8HashableP", "paused"]
+- ["s8HashableP", "rawValue"]
+- ["s8HashableP", ""]
+- !private ["Si", "hashValue"]
+- !private ["s25LosslessStringConvertibleP", "_getBuiltinLogicValue"]
+- !private ["s25LosslessStringConvertibleP", "hashValue"]
+- ["s25LosslessStringConvertibleP", "init"]
+- ["17MZDownloadManager0A5ModelC", "Date"]
+- ["17MZDownloadManager0A5ModelC", "Float"]
+- ["17MZDownloadManager0A5ModelC", "Int"]
+- ["17MZDownloadManager0A5ModelC", "String"]
+- ["17MZDownloadManager0A5ModelC", "TaskStatus"]
+- ["17MZDownloadManager0A5ModelC", "URLSessionDownloadTask"]
+- ["17MZDownloadManager0A5ModelC", "deinit"]
+- ["17MZDownloadManager0A5ModelC", "destinationPath"]
+- ["17MZDownloadManager0A5ModelC", "downloadedFile"]
+- ["17MZDownloadManager0A5ModelC", "file"]
+- ["17MZDownloadManager0A5ModelC", "fileName"]
+- ["17MZDownloadManager0A5ModelC", "fileURL"]
+- ["17MZDownloadManager0A5ModelC", "init"]
+- ["17MZDownloadManager0A5ModelC", "progress"]
+- ["17MZDownloadManager0A5ModelC", "remainingTime"]
+- ["17MZDownloadManager0A5ModelC", "speed"]
+- ["17MZDownloadManager0A5ModelC", "startTime"]
+- ["17MZDownloadManager0A5ModelC", "status"]
+- ["17MZDownloadManager0A5ModelC", "task"]
+- !private ["s10MirrorPathP", "hashValue"]
+- ["s10MirrorPathP", "init"]
+- ["So8NSCodingP", "init"]
+- ["So9NSCopyingP", "init"]
+- ["So21NSItemProviderReadingP", "init"]
+- ["So21NSItemProviderWritingP", "init"]
+- ["So16NSMutableCopyingP", "init"]
+- ["So8NSObjectC", "Date"]
+- ["So8NSObjectC", "Float"]
+- ["So8NSObjectC", "Int"]
+- ["So8NSObjectC", "String"]
+- ["So8NSObjectC", "TaskStatus"]
+- ["So8NSObjectC", "URLSessionDownloadTask"]
+- ["So8NSObjectC", "destinationPath"]
+- ["So8NSObjectC", "downloadedFile"]
+- ["So8NSObjectC", "file"]
+- ["So8NSObjectC", "fileName"]
+- ["So8NSObjectC", "fileURL"]
+- ["So8NSObjectC", "init"]
+- ["So8NSObjectC", "progress"]
+- ["So8NSObjectC", "remainingTime"]
+- ["So8NSObjectC", "speed"]
+- ["So8NSObjectC", "startTime"]
+- ["So8NSObjectC", "status"]
+- ["So8NSObjectC", "task"]
+- ["So8NSObjectC", ""]
+- ["So16NSObjectProtocolP", "TaskStatus"]
+- !private ["So16NSObjectProtocolP", "destinationPath"]
+- !private ["So16NSObjectProtocolP", "fileName"]
+- !private ["So16NSObjectProtocolP", "fileURL"]
+- ["So16NSObjectProtocolP", "init"]
+- ["So16NSObjectProtocolP", ""]
+- ["So14NSSecureCodingP", "init"]
+- ["So8NSStringC", "init"]
+- !private ["s7NumericP", "hashValue"]
+- ["s26RangeReplaceableCollectionP", "init"]
+- ["s16RawRepresentableP", "RawValue"]
+- ["s16RawRepresentableP", "description"]
+- ["s16RawRepresentableP", "downloading"]
+- ["s16RawRepresentableP", "failed"]
+- ["s16RawRepresentableP", "gettingInfo"]
+- ["s16RawRepresentableP", "hashValue"]
+- ["s16RawRepresentableP", "init"]
+- ["s16RawRepresentableP", "paused"]
+- ["s16RawRepresentableP", "rawValue"]
+- ["s16RawRepresentableP", ""]
+- ["s8SequenceP", "init"]
+- !private ["s13SignedIntegerP", "hashValue"]
+- !private ["s13SignedNumericP", "hashValue"]
+- !private ["s10StrideableP", "hashValue"]
+- ["SS", "init"]
+- ["s14StringProtocolP", "init"]
+- ["17MZDownloadManager10TaskStatusO", "RawValue"]
+- ["17MZDownloadManager10TaskStatusO", "String"]
+- ["17MZDownloadManager10TaskStatusO", "deinit"]
+- ["17MZDownloadManager10TaskStatusO", "description"]
+- ["17MZDownloadManager10TaskStatusO", "downloading"]
+- ["17MZDownloadManager10TaskStatusO", "failed"]
+- ["17MZDownloadManager10TaskStatusO", "gettingInfo"]
+- ["17MZDownloadManager10TaskStatusO", "hashValue"]
+- ["17MZDownloadManager10TaskStatusO", "init"]
+- ["17MZDownloadManager10TaskStatusO", "paused"]
+- ["17MZDownloadManager10TaskStatusO", "rawValue"]
+- ["17MZDownloadManager10TaskStatusO", "unknown"]
+- ["s16TextOutputStreamP", "init"]
+- ["s20TextOutputStreamableP", "init"]
+- ["s23_BidirectionalIndexableP", "init"]
+- !private ["s18_BitwiseOperationsP", "hashValue"]
+- !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "_getBuiltinLogicValue"]
+- ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "hashValue"]
+- ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- ["s33_ExpressibleByStringInterpolationP", "init"]
+- ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- ["s10_IndexableP", "init"]
+- ["s14_IndexableBaseP", "init"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "TaskStatus"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "destinationPath"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "fileName"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "fileURL"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["s21_ObjectiveCBridgeableP", "_getBuiltinLogicValue"]
+- !private ["s21_ObjectiveCBridgeableP", "hashValue"]
+- ["s21_ObjectiveCBridgeableP", "init"]
+- ["s26_RangeReplaceableIndexableP", "init"]
+- !private ["s11_StrideableP", "hashValue"]
+- ["s16_SwiftStringViewP", "init"]
+depends-nominal:
+- "s23BidirectionalCollectionP"
+- !private "s13BinaryIntegerP"
+- !private "Sb"
+- "s7CVarArgP"
+- "s10CollectionP"
+- "s10ComparableP"
+- "s28CustomDebugStringConvertibleP"
+- "s29CustomPlaygroundQuickLookableP"
+- "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- "s9DecodableP"
+- "s9EncodableP"
+- "s9EquatableP"
+- !private "s27ExpressibleByBooleanLiteralP"
+- "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- "s26ExpressibleByStringLiteralP"
+- "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "s17FixedWidthIntegerP"
+- "s8HashableP"
+- !private "Si"
+- "s25LosslessStringConvertibleP"
+- "17MZDownloadManager0A5ModelC"
+- "s10MirrorPathP"
+- "So8NSCodingP"
+- "So9NSCopyingP"
+- "So21NSItemProviderReadingP"
+- "So21NSItemProviderWritingP"
+- "So16NSMutableCopyingP"
+- "So8NSObjectC"
+- "So16NSObjectProtocolP"
+- "So14NSSecureCodingP"
+- "So8NSStringC"
+- !private "s7NumericP"
+- "s26RangeReplaceableCollectionP"
+- "s16RawRepresentableP"
+- "s8SequenceP"
+- !private "s13SignedIntegerP"
+- !private "s13SignedNumericP"
+- !private "s10StrideableP"
+- "SS"
+- "s14StringProtocolP"
+- "17MZDownloadManager10TaskStatusO"
+- "s16TextOutputStreamP"
+- "s20TextOutputStreamableP"
+- "s23_BidirectionalIndexableP"
+- !private "s18_BitwiseOperationsP"
+- !private "s35_ExpressibleByBuiltinBooleanLiteralP"
+- "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- "s34_ExpressibleByBuiltinStringLiteralP"
+- "s39_ExpressibleByBuiltinUTF16StringLiteralP"
+- "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- "s33_ExpressibleByStringInterpolationP"
+- "s35_HasCustomAnyHashableRepresentationP"
+- "s10_IndexableP"
+- "s14_IndexableBaseP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- "s21_ObjectiveCBridgeableP"
+- "s26_RangeReplaceableIndexableP"
+- !private "s11_StrideableP"
+- "s16_SwiftStringViewP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
+- "/Users/christie/personal/MZDownloadManager/Example/Pods/Target Support Files/MZDownloadManager/MZDownloadManager-umbrella.h"
+- "/Users/christie/personal/MZDownloadManager/Example/build/Pods.build/Debug-iphoneos/MZDownloadManager.build/unextended-module.modulemap"
+interface-hash: "6af6301e53e4a981b0a3ce7cc62d926c"
