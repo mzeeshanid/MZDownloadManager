@@ -20,5 +20,6 @@ Pod::Spec.new do |s|
   s.source_files = 'MZDownloadManager/Classes/**/*'
 
   s.frameworks = 'UIKit', 'Foundation'
+  s.swift_version = '4.0'
 
 end
