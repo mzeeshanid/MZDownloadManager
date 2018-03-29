@@ -33,9 +33,7 @@ class MZDownloadedViewController: UITableViewController {
             print("Error while getting directory content \(error)")
         }
         
-        NotificationCenter.default.addObserver(self, selector: NSSelectorFromString("downloadFinishedNotification:"), name: NSNotification.Name(rawValue: MZUtility.DownloadCompletedNotif as String), object: nil)
-        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MZDownloadedViewController.downloadFinishedNotification(_:)), name: DownloadCompletedNotif as String, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(downloadFinishedNotification(_:)), name: NSNotification.Name(rawValue: MZUtility.DownloadCompletedNotif as String), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,7 +43,7 @@ class MZDownloadedViewController: UITableViewController {
     
     // MARK: - NSNotification Methods -
     
-    func downloadFinishedNotification(_ notification : Notification) {
+    @objc func downloadFinishedNotification(_ notification : Notification) {
         let fileName : NSString = notification.object as! NSString
         downloadedFilesArray.append(fileName.lastPathComponent)
         tableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)

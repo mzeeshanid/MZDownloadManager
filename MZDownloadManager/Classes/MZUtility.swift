@@ -10,15 +10,15 @@ import UIKit
 
 open class MZUtility: NSObject {
     
-    open static let DownloadCompletedNotif: String = {
+    @objc open static let DownloadCompletedNotif: String = {
         return "com.MZDownloadManager.DownloadCompletedNotif"
     }()
     
-    open static let baseFilePath: String = {
+    @objc open static let baseFilePath: String = {
         return (NSHomeDirectory() as NSString).appendingPathComponent("Documents") as String
     }()
 
-    open class func getUniqueFileNameWithPath(_ filePath : NSString) -> NSString {
+    @objc open class func getUniqueFileNameWithPath(_ filePath : NSString) -> NSString {
         let fullFileName        : NSString = filePath.lastPathComponent as NSString
         let fileName            : NSString = fullFileName.deletingPathExtension as NSString
         let fileExtension       : NSString = fullFileName.pathExtension as NSString
@@ -55,7 +55,7 @@ open class MZUtility: NSObject {
         return suggestedFileName
     }
     
-    open class func calculateFileSizeInUnit(_ contentLength : Int64) -> Float {
+    @objc open class func calculateFileSizeInUnit(_ contentLength : Int64) -> Float {
         let dataLength : Float64 = Float64(contentLength)
         if dataLength >= (1024.0*1024.0*1024.0) {
             return Float(dataLength/(1024.0*1024.0*1024.0))
@@ -68,7 +68,7 @@ open class MZUtility: NSObject {
         }
     }
     
-    open class func calculateUnit(_ contentLength : Int64) -> NSString {
+    @objc open class func calculateUnit(_ contentLength : Int64) -> NSString {
         if(contentLength >= (1024*1024*1024)) {
             return "GB"
         } else if contentLength >= (1024*1024) {
@@ -80,7 +80,7 @@ open class MZUtility: NSObject {
         }
     }
     
-    open class func addSkipBackupAttributeToItemAtURL(_ docDirectoryPath : NSString) -> Bool {
+    @objc open class func addSkipBackupAttributeToItemAtURL(_ docDirectoryPath : NSString) -> Bool {
         let url : URL = URL(fileURLWithPath: docDirectoryPath as String)
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: url.path) {
@@ -98,13 +98,13 @@ open class MZUtility: NSObject {
         }
     }
     
-    open class func getFreeDiskspace() -> Int64? {
+    @objc open class func getFreeDiskspace() -> NSNumber? {
         let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let systemAttributes: AnyObject?
         do {
             systemAttributes = try FileManager.default.attributesOfFileSystem(forPath: documentDirectoryPath.last!) as AnyObject?
             let freeSize = systemAttributes?[FileAttributeKey.systemFreeSize] as? NSNumber
-            return freeSize?.int64Value
+            return freeSize
         } catch let error as NSError {
             print("Error Obtaining System Memory Info: Domain = \(error.domain), Code = \(error.code)")
             return nil;

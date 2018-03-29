@@ -24,12 +24,12 @@ class MZAvailableDownloadsViewController: UITableViewController {
         }
         debugPrint("custom download path: \(myDownloadPath)")
 
-        availableDownloadsArray.append("https://www.dropbox.com/s/yrura6qlcgcwpp4/file1.mp4?dl=1")
-        availableDownloadsArray.append("https://www.dropbox.com/s/y9kgs6caztxxjdh/AlecrimCoreData-master.zip?dl=1")
+        availableDownloadsArray.append("https://www.dropbox.com/s/6xlpner3s6q336f/file1.mp4?dl=1")
         availableDownloadsArray.append("https://www.dropbox.com/s/73ymbx6icoiqus9/file2.mp4?dl=1")
         availableDownloadsArray.append("https://www.dropbox.com/s/4pw4jwiju0eon6r/file3.mp4?dl=1")
         availableDownloadsArray.append("https://www.dropbox.com/s/2bmbk8id7nseirq/file4.mp4?dl=1")
         availableDownloadsArray.append("https://www.dropbox.com/s/cw7wfyaic9rtzwd/GCDExample-master.zip?dl=1")
+        availableDownloadsArray.append("https://www.dropbox.com/s/y9kgs6caztxxjdh/AlecrimCoreData-master.zip?dl=1")
         
         self.setUpDownloadingViewController()
     }
