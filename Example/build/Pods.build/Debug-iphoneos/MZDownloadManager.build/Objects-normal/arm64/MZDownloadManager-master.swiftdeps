@@ -1,0 +1,7 @@
+version: "Apple Swift version 4.0.3 (swiftlang-900.0.74.1 clang-900.0.39.2)"
+options: "2490b60babbf4df26eb0d13a265bcdf5"
+build_time: [1521598430, 405276000]
+inputs:
+  "/Users/christie/personal/MZDownloadManager/MZDownloadManager/Classes/MZDownloadManager.swift": [1521598430, 0]
+  "/Users/christie/personal/MZDownloadManager/MZDownloadManager/Classes/MZDownloadModel.swift": [1521598296, 0]
+  "/Users/christie/personal/MZDownloadManager/MZDownloadManager/Classes/MZUtility.swift": [1521598296, 0]

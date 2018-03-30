@@ -1,0 +1,33 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/christie/personal/MZDownloadManager/Example/build/Debug-iphoneos/MZDownloadManager/MZDownloadManager.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "MZDownloadManager-Swift.h",
+          'external-contents': "/Users/christie/personal/MZDownloadManager/Example/build/Debug-iphoneos/MZDownloadManager/MZDownloadManager.framework/Headers/MZDownloadManager-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "MZDownloadManager-umbrella.h",
+          'external-contents': "/Users/christie/personal/MZDownloadManager/Example/Pods/Target Support Files/MZDownloadManager/MZDownloadManager-umbrella.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/christie/personal/MZDownloadManager/Example/build/Debug-iphoneos/MZDownloadManager/MZDownloadManager.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/christie/personal/MZDownloadManager/Example/build/Pods.build/Debug-iphoneos/MZDownloadManager.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}
