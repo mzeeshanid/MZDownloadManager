@@ -206,7 +206,10 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     downloadModel.speed = (speedSize, speedUnit as String)
                     downloadModel.progress = progress
                     
-                    self.downloadingArray[index] = downloadModel
+                    if self.downloadingArray.contains(downloadModel),
+                        let objectIndex = self.downloadingArray.index(of: downloadModel) {
+                        self.downloadingArray[objectIndex] = downloadModel
+                    }
                     
                     self.delegate?.downloadRequestDidUpdateProgress(downloadModel, index: index)
                 })
@@ -244,10 +247,14 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     //Otherwise blindly give error Destination folder does not exists
                     
                     if let _ = self.delegate?.downloadRequestDestinationDoestNotExist {
+                         DispatchQueue.main.async {
                         self.delegate?.downloadRequestDestinationDoestNotExist?(downloadModel, index: index, location: location)
+                        }
                     } else {
                         let error = NSError(domain: "FolderDoesNotExist", code: 404, userInfo: [NSLocalizedDescriptionKey : "Destination folder does not exists"])
+                         DispatchQueue.main.async {
                         self.delegate?.downloadRequestDidFailWithError?(error, downloadModel: downloadModel, index: index)
+                        }
                     }
                 }
                 
@@ -349,18 +356,21 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
 
 extension MZDownloadManager {
     
-    @objc public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String) {
+    @objc public func addDownloadTask(_ fileName: String, fileURLString: String, destinationPath: String) {
         
-        let url = URL(string: fileURL as String)!
+        guard let url = URL(string: fileURLString) else {
+            return
+        }
+        
         let request = URLRequest(url: url)
         
         let downloadTask = sessionManager.downloadTask(with: request)
-        downloadTask.taskDescription = [fileName, fileURL, destinationPath].joined(separator: ",")
+        downloadTask.taskDescription = [fileName, fileURLString, destinationPath].joined(separator: ",")
         downloadTask.resume()
         
         debugPrint("session manager:\(sessionManager) url:\(url) request:\(request)")
         
-        let downloadModel = MZDownloadModel(fileName: fileName, fileURLString: fileURL, destinationPath: destinationPath)
+        let downloadModel = MZDownloadModel(fileName: fileName, fileURLString: fileURLString, destinationPath: destinationPath)
         downloadModel.startTime = Date()
         downloadModel.status = TaskStatus.downloading.description()
         downloadModel.task = downloadTask
@@ -369,8 +379,8 @@ extension MZDownloadManager {
         delegate?.downloadRequestDidStart?(downloadModel, index: downloadingArray.count - 1)
     }
     
-    @objc public func addDownloadTask(_ fileName: String, fileURL: String) {
-        addDownloadTask(fileName, fileURL: fileURL, destinationPath: "")
+    @objc public func addDownloadTask(_ fileName: String, fileURLString: String) {
+        addDownloadTask(fileName, fileURLString: fileURLString, destinationPath: "")
     }
     
     @objc public func pauseDownloadTaskAtIndex(_ index: Int) {

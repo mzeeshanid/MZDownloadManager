@@ -110,4 +110,15 @@ open class MZUtility: NSObject {
             return nil;
         }
     }
+    
+    @objc open class func removeAllFiles() {
+        let fileManager = FileManager.default
+        
+        do {
+            try fileManager.removeItem(atPath: MZUtility.baseFilePath)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong: \(error)")
+        }
+    }
 }
