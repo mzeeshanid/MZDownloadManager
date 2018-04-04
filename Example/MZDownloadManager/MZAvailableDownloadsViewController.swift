@@ -74,14 +74,14 @@ extension MZAvailableDownloadsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let fileURL  : NSString = availableDownloadsArray[(indexPath as NSIndexPath).row] as NSString
-        var fileName : NSString = fileURL.lastPathComponent as NSString
+        let fileURLString  : NSString = availableDownloadsArray[(indexPath as NSIndexPath).row] as NSString
+        var fileName : NSString = fileURLString.lastPathComponent as NSString
         fileName = MZUtility.getUniqueFileNameWithPath((myDownloadPath as NSString).appendingPathComponent(fileName as String) as NSString)
         
         //Use it download at default path i.e document directory
-//        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL as String)
+//        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURLString: fileURLString as String)
         
-        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL as String, destinationPath: myDownloadPath)
+        mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURLString: fileURLString as String, destinationPath: myDownloadPath)
         
         availableDownloadsArray.remove(at: (indexPath as NSIndexPath).row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.right)

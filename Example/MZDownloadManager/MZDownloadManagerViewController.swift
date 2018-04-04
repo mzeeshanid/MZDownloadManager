@@ -174,12 +174,12 @@ extension MZDownloadManagerViewController {
 
 extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
     
-    func downloadRequestStarted(_ downloadModel: MZDownloadModel, index: Int) {
+    func downloadRequestDidStart(_ downloadModel: MZDownloadModel, index: Int) {
         let indexPath = IndexPath.init(row: index, section: 0)
         tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.fade)
     }
     
-    func downloadRequestDidPopulatedInterruptedTasks(_ downloadModels: [MZDownloadModel]) {
+    func downloadRequestDidPopulateInterruptedTasks(_ downloadModels: [MZDownloadModel]) {
         tableView.reloadData()
     }
     
@@ -187,11 +187,11 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
         self.refreshCellForIndex(downloadModel, index: index)
     }
     
-    func downloadRequestDidPaused(_ downloadModel: MZDownloadModel, index: Int) {
+    func downloadRequestDidPause(_ downloadModel: MZDownloadModel, index: Int) {
         self.refreshCellForIndex(downloadModel, index: index)
     }
     
-    func downloadRequestDidResumed(_ downloadModel: MZDownloadModel, index: Int) {
+    func downloadRequestDidResume(_ downloadModel: MZDownloadModel, index: Int) {
         self.refreshCellForIndex(downloadModel, index: index)
     }
     
@@ -216,7 +216,7 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: MZUtility.DownloadCompletedNotif as String), object: docDirectoryPath)
     }
     
-    func downloadRequestDidFailedWithError(_ error: NSError, downloadModel: MZDownloadModel, index: Int) {
+    func downloadRequestDidFailWithError(_ error: NSError, downloadModel: MZDownloadModel, index: Int) {
         self.safelyDismissAlertController()
         self.refreshCellForIndex(downloadModel, index: index)
         
@@ -225,7 +225,7 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
     
     //Oppotunity to handle destination does not exists error
     //This delegate will be called on the session queue so handle it appropriately
-    func downloadRequestDestinationDoestNotExists(_ downloadModel: MZDownloadModel, index: Int, location: URL) {
+    func downloadRequestDestinationDoestNotExist(_ downloadModel: MZDownloadModel, index: Int, location: URL) {
         let myDownloadPath = MZUtility.baseFilePath + "/Default folder"
         if !FileManager.default.fileExists(atPath: myDownloadPath) {
             try! FileManager.default.createDirectory(atPath: myDownloadPath, withIntermediateDirectories: true, attributes: nil)
