@@ -30,7 +30,7 @@ public enum TaskStatus: Int {
 open class MZDownloadModel: NSObject {
     
     open var fileName: String!
-    open var fileURL: String!
+    open var fileURLString: String!
     open var status: String = TaskStatus.gettingInfo.description()
     
     open var file: (size: Float, unit: String)?
@@ -48,15 +48,15 @@ open class MZDownloadModel: NSObject {
     
     fileprivate(set) open var destinationPath: String = ""
     
-    fileprivate convenience init(fileName: String, fileURL: String) {
+    fileprivate convenience init(fileName: String, fileURLString: String) {
         self.init()
         
         self.fileName = fileName
-        self.fileURL = fileURL
+        self.fileURLString = fileURLString
     }
     
-    convenience init(fileName: String, fileURL: String, destinationPath: String) {
-        self.init(fileName: fileName, fileURL: fileURL)
+    convenience init(fileName: String, fileURLString: String, destinationPath: String) {
+        self.init(fileName: fileName, fileURLString: fileURLString)
         
         self.destinationPath = destinationPath
     }

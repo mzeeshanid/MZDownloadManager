@@ -27,6 +27,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
+// MARK: MZDownloadManager Protocols
 
 @objc public protocol MZDownloadManagerDelegate: class {
     /**A delegate method called each time whenever any download task's progress is updated
@@ -34,16 +35,16 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     @objc func downloadRequestDidUpdateProgress(_ downloadModel: MZDownloadModel, index: Int)
     /**A delegate method called when interrupted tasks are repopulated
      */
-    @objc func downloadRequestDidPopulatedInterruptedTasks(_ downloadModel: [MZDownloadModel])
+    @objc func downloadRequestDidPopulateInterruptedTasks(_ downloadModel: [MZDownloadModel])
     /**A delegate method called each time whenever new download task is start downloading
      */
-    @objc optional func downloadRequestStarted(_ downloadModel: MZDownloadModel, index: Int)
+    @objc optional func downloadRequestDidStart(_ downloadModel: MZDownloadModel, index: Int)
     /**A delegate method called each time whenever running download task is paused. If task is already paused the action will be ignored
      */
-    @objc optional func downloadRequestDidPaused(_ downloadModel: MZDownloadModel, index: Int)
+    @objc optional func downloadRequestDidPause(_ downloadModel: MZDownloadModel, index: Int)
     /**A delegate method called each time whenever any download task is resumed. If task is already downloading the action will be ignored
      */
-    @objc optional func downloadRequestDidResumed(_ downloadModel: MZDownloadModel, index: Int)
+    @objc optional func downloadRequestDidResume(_ downloadModel: MZDownloadModel, index: Int)
     /**A delegate method called each time whenever any download task is resumed. If task is already downloading the action will be ignored
      */
     @objc optional func downloadRequestDidRetry(_ downloadModel: MZDownloadModel, index: Int)
@@ -55,12 +56,12 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     @objc optional func downloadRequestFinished(_ downloadModel: MZDownloadModel, index: Int)
     /**A delegate method called each time whenever any download task is failed due to any reason
      */
-    @objc optional func downloadRequestDidFailedWithError(_ error: NSError, downloadModel: MZDownloadModel, index: Int)
+    @objc optional func downloadRequestDidFailWithError(_ error: NSError, downloadModel: MZDownloadModel, index: Int)
     /**A delegate method called each time whenever specified destination does not exists. It will be called on the session queue. It provides the opportunity to handle error appropriately
      */
-    @objc optional func downloadRequestDestinationDoestNotExists(_ downloadModel: MZDownloadModel, index: Int, location: URL)
-    
+    @objc optional func downloadRequestDestinationDoestNotExist(_ downloadModel: MZDownloadModel, index: Int, location: URL)
 }
+
 
 open class MZDownloadManager: NSObject {
     
@@ -122,10 +123,10 @@ extension MZDownloadManager {
         for downloadTask in downloadTasks {
             let taskDescComponents: [String] = downloadTask.taskDescription!.components(separatedBy: ",")
             let fileName = taskDescComponents[TaskDescFileNameIndex]
-            let fileURL = taskDescComponents[TaskDescFileURLIndex]
+            let fileURLString = taskDescComponents[TaskDescFileURLIndex]
             let destinationPath = taskDescComponents[TaskDescFileDestinationIndex]
             
-            let downloadModel = MZDownloadModel.init(fileName: fileName, fileURL: fileURL, destinationPath: destinationPath)
+            let downloadModel = MZDownloadModel(fileName: fileName, fileURLString: fileURLString, destinationPath: destinationPath)
             downloadModel.task = downloadTask
             downloadModel.startTime = Date()
             
@@ -233,7 +234,7 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     } catch let error as NSError {
                         debugPrint("Error while moving downloaded file to destination path:\(error)")
                         DispatchQueue.main.async(execute: { () -> Void in
-                            self.delegate?.downloadRequestDidFailedWithError?(error, downloadModel: downloadModel, index: index)
+                            self.delegate?.downloadRequestDidFailWithError?(error, downloadModel: downloadModel, index: index)
                         })
                     }
                 } else {
@@ -242,11 +243,11 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     //Delegate will be called on the session queue
                     //Otherwise blindly give error Destination folder does not exists
                     
-                    if let _ = self.delegate?.downloadRequestDestinationDoestNotExists {
-                        self.delegate?.downloadRequestDestinationDoestNotExists?(downloadModel, index: index, location: location)
+                    if let _ = self.delegate?.downloadRequestDestinationDoestNotExist {
+                        self.delegate?.downloadRequestDestinationDoestNotExist?(downloadModel, index: index, location: location)
                     } else {
                         let error = NSError(domain: "FolderDoesNotExist", code: 404, userInfo: [NSLocalizedDescriptionKey : "Destination folder does not exists"])
-                        self.delegate?.downloadRequestDidFailedWithError?(error, downloadModel: downloadModel, index: index)
+                        self.delegate?.downloadRequestDidFailWithError?(error, downloadModel: downloadModel, index: index)
                     }
                 }
                 
@@ -271,7 +272,7 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                 let fileURL = taskDescComponents[self.TaskDescFileURLIndex]
                 let destinationPath = taskDescComponents[self.TaskDescFileDestinationIndex]
                 
-                let downloadModel = MZDownloadModel.init(fileName: fileName, fileURL: fileURL, destinationPath: destinationPath)
+                let downloadModel = MZDownloadModel(fileName: fileName, fileURLString: fileURL, destinationPath: destinationPath)
                 downloadModel.status = TaskStatus.failed.description()
                 downloadModel.task = downloadTask
                 
@@ -289,7 +290,7 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                 
                 self.downloadingArray.append(downloadModel)
                 
-                self.delegate?.downloadRequestDidPopulatedInterruptedTasks(self.downloadingArray)
+                self.delegate?.downloadRequestDidPopulateInterruptedTasks(self.downloadingArray)
                 
             } else {
                 for(index, object) in self.downloadingArray.enumerated() {
@@ -310,7 +311,7 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                             if self.isValidResumeData(resumeData) == true {
                                 newTask = self.sessionManager.downloadTask(withResumeData: resumeData!)
                             } else {
-                                newTask = self.sessionManager.downloadTask(with: URL(string: downloadModel.fileURL)!)
+                                newTask = self.sessionManager.downloadTask(with: URL(string: downloadModel.fileURLString)!)
                             }
                             
                             newTask.taskDescription = task.taskDescription
@@ -320,11 +321,11 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                             self.downloadingArray[index] = downloadModel
                             
                             if let error = err {
-                                self.delegate?.downloadRequestDidFailedWithError?(error, downloadModel: downloadModel, index: index)
+                                self.delegate?.downloadRequestDidFailWithError?(error, downloadModel: downloadModel, index: index)
                             } else {
                                 let error: NSError = NSError(domain: "MZDownloadManagerDomain", code: 1000, userInfo: [NSLocalizedDescriptionKey : "Unknown error occurred"])
                                 
-                                self.delegate?.downloadRequestDidFailedWithError?(error, downloadModel: downloadModel, index: index)
+                                self.delegate?.downloadRequestDidFailWithError?(error, downloadModel: downloadModel, index: index)
                             }
                         }
                         break;
@@ -359,13 +360,13 @@ extension MZDownloadManager {
         
         debugPrint("session manager:\(sessionManager) url:\(url) request:\(request)")
         
-        let downloadModel = MZDownloadModel.init(fileName: fileName, fileURL: fileURL, destinationPath: destinationPath)
+        let downloadModel = MZDownloadModel(fileName: fileName, fileURLString: fileURL, destinationPath: destinationPath)
         downloadModel.startTime = Date()
         downloadModel.status = TaskStatus.downloading.description()
         downloadModel.task = downloadTask
         
         downloadingArray.append(downloadModel)
-        delegate?.downloadRequestStarted?(downloadModel, index: downloadingArray.count - 1)
+        delegate?.downloadRequestDidStart?(downloadModel, index: downloadingArray.count - 1)
     }
     
     @objc public func addDownloadTask(_ fileName: String, fileURL: String) {
@@ -387,7 +388,7 @@ extension MZDownloadManager {
         
         downloadingArray[index] = downloadModel
         
-        delegate?.downloadRequestDidPaused?(downloadModel, index: index)
+        delegate?.downloadRequestDidPause?(downloadModel, index: index)
     }
     
     @objc public func resumeDownloadTaskAtIndex(_ index: Int) {
@@ -404,7 +405,7 @@ extension MZDownloadManager {
         
         downloadingArray[index] = downloadModel
         
-        delegate?.downloadRequestDidResumed?(downloadModel, index: index)
+        delegate?.downloadRequestDidResume?(downloadModel, index: index)
     }
     
     @objc public func retryDownloadTaskAtIndex(_ index: Int) {
