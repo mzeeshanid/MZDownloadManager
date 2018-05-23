@@ -177,7 +177,7 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     let totalBytesCount = Double(downloadTask.countOfBytesExpectedToReceive)
                     let progress = Float(receivedBytesCount / totalBytesCount)
                     
-                    let taskStartedDate = downloadModel.startTime!
+                    let taskStartedDate = downloadModel.startTime ?? Date()
                     let timeInterval = taskStartedDate.timeIntervalSinceNow
                     let downloadTime = TimeInterval(-1 * timeInterval)
                     
@@ -205,7 +205,9 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     downloadModel.speed = (speedSize, speedUnit as String)
                     downloadModel.progress = progress
                     
-                    self.downloadingArray[index] = downloadModel
+                    if self.downloadingArray.contains(downloadModel), let objectIndex = self.downloadingArray.index(of: downloadModel) {
+                        self.downloadingArray[objectIndex] = downloadModel
+                    }
                     
                     self.delegate?.downloadRequestDidUpdateProgress(downloadModel, index: index)
                 })
