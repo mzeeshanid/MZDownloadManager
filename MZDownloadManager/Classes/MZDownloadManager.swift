@@ -91,6 +91,11 @@ open class MZDownloadManager: NSObject {
     
     fileprivate func backgroundSession(identifier: String) -> URLSession {
         let sessionConfiguration = URLSessionConfiguration.background(withIdentifier: identifier)
+      
+        sessionConfiguration.timeoutIntervalForRequest = 60.0
+        sessionConfiguration.timeoutIntervalForResource = 60.0 * 60.0 * 24
+        sessionConfiguration.httpMaximumConnectionsPerHost = 3
+
         let session = Foundation.URLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: nil)
         return session
     }
