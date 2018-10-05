@@ -76,26 +76,21 @@ open class MZDownloadManager: NSObject {
     
     open var downloadingArray: [MZDownloadModel] = []
     
-    public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate) {
+    public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate, sessionConfiguration: URLSessionConfiguration? = nil, completion: (() -> Void)? = nil) {
         self.init()
-        
         self.delegate = delegate
-        self.sessionManager = backgroundSession(identifier: sessionIdentifer)
+        self.sessionManager = backgroundSession(identifier: sessionIdentifer, configuration: sessionConfiguration)
         self.populateOtherDownloadTasks()
-    }
-    
-    public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate, completion: (() -> Void)?) {
-        self.init(session: sessionIdentifer, delegate: delegate)
         self.backgroundSessionCompletionHandler = completion
     }
     
-    fileprivate func backgroundSession(identifier: String) -> URLSession {
-        let sessionConfiguration = URLSessionConfiguration.background(withIdentifier: identifier)
-      
-        sessionConfiguration.timeoutIntervalForRequest = 60.0
-        sessionConfiguration.timeoutIntervalForResource = 60.0 * 60.0 * 24
-        sessionConfiguration.httpMaximumConnectionsPerHost = 3
-
+    public class func defaultSessionConfiguration(identifier: String) -> URLSessionConfiguration {
+        return URLSessionConfiguration.background(withIdentifier: identifier)
+    }
+    
+    fileprivate func backgroundSession(identifier: String, configuration: URLSessionConfiguration? = nil) -> URLSession {
+        var sessionConfiguration = configuration ?? MZDownloadManager.defaultSessionConfiguration(identifier: identifier)
+        assert(identifier == sessionConfiguration.identifier, "Configuration identifiers do not match")
         let session = Foundation.URLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: nil)
         return session
     }
