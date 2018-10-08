@@ -436,7 +436,7 @@ extension MZDownloadManager {
         let application = UIApplication.shared
         let applicationState = application.applicationState
         
-        if applicationState == UIApplicationState.background {
+        if applicationState == UIApplication.State.background {
             let localNotification = UILocalNotification()
             localNotification.alertBody = notifBody
             localNotification.alertAction = notifAction
