@@ -76,21 +76,21 @@ open class MZDownloadManager: NSObject {
     
     open var downloadingArray: [MZDownloadModel] = []
     
-    public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate) {
+    public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate, sessionConfiguration: URLSessionConfiguration? = nil, completion: (() -> Void)? = nil) {
         self.init()
-        
         self.delegate = delegate
-        self.sessionManager = backgroundSession(identifier: sessionIdentifer)
+        self.sessionManager = backgroundSession(identifier: sessionIdentifer, configuration: sessionConfiguration)
         self.populateOtherDownloadTasks()
-    }
-    
-    public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate, completion: (() -> Void)?) {
-        self.init(session: sessionIdentifer, delegate: delegate)
         self.backgroundSessionCompletionHandler = completion
     }
     
-    fileprivate func backgroundSession(identifier: String) -> URLSession {
-        let sessionConfiguration = URLSessionConfiguration.background(withIdentifier: identifier)
+    public class func defaultSessionConfiguration(identifier: String) -> URLSessionConfiguration {
+        return URLSessionConfiguration.background(withIdentifier: identifier)
+    }
+    
+    fileprivate func backgroundSession(identifier: String, configuration: URLSessionConfiguration? = nil) -> URLSession {
+        var sessionConfiguration = configuration ?? MZDownloadManager.defaultSessionConfiguration(identifier: identifier)
+        assert(identifier == sessionConfiguration.identifier, "Configuration identifiers do not match")
         let session = Foundation.URLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: nil)
         return session
     }
@@ -177,7 +177,7 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     let totalBytesCount = Double(downloadTask.countOfBytesExpectedToReceive)
                     let progress = Float(receivedBytesCount / totalBytesCount)
                     
-                    let taskStartedDate = downloadModel.startTime!
+                    let taskStartedDate = downloadModel.startTime ?? Date()
                     let timeInterval = taskStartedDate.timeIntervalSinceNow
                     let downloadTime = TimeInterval(-1 * timeInterval)
                     
@@ -205,7 +205,9 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     downloadModel.speed = (speedSize, speedUnit as String)
                     downloadModel.progress = progress
                     
-                    self.downloadingArray[index] = downloadModel
+                    if self.downloadingArray.contains(downloadModel), let objectIndex = self.downloadingArray.index(of: downloadModel) {
+                        self.downloadingArray[objectIndex] = downloadModel
+                    }
                     
                     self.delegate?.downloadRequestDidUpdateProgress(downloadModel, index: index)
                 })
@@ -434,7 +436,7 @@ extension MZDownloadManager {
         let application = UIApplication.shared
         let applicationState = application.applicationState
         
-        if applicationState == UIApplicationState.background {
+        if applicationState == UIApplication.State.background {
             let localNotification = UILocalNotification()
             localNotification.alertBody = notifBody
             localNotification.alertAction = notifAction
