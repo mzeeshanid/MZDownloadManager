@@ -220,7 +220,7 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
         self.safelyDismissAlertController()
         self.refreshCellForIndex(downloadModel, index: index)
         
-        debugPrint("Error while downloading file: \(downloadModel.fileName)  Error: \(error)")
+        debugPrint("Error while downloading file: \(String(describing: downloadModel.fileName))  Error: \(String(describing: error))")
     }
     
     //Oppotunity to handle destination does not exists error

@@ -149,7 +149,7 @@ extension MZDownloadManager {
         
         do {
             var resumeDictionary : AnyObject!
-            resumeDictionary = try PropertyListSerialization.propertyList(from: resumeData!, options: PropertyListSerialization.MutabilityOptions(), format: nil) as AnyObject!
+            resumeDictionary = try PropertyListSerialization.propertyList(from: resumeData!, options: PropertyListSerialization.MutabilityOptions(), format: nil) as AnyObject
             var localFilePath = (resumeDictionary?["NSURLSessionResumeInfoLocalPath"] as? String)
             
             if localFilePath == nil || localFilePath?.count < 1 {
@@ -350,14 +350,14 @@ extension MZDownloadManager {
     
     @objc public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String) {
         
-        let url = URL(string: fileURL as String)!
+        let url = URL(string: fileURL)!
         let request = URLRequest(url: url)
         
         let downloadTask = sessionManager.downloadTask(with: request)
         downloadTask.taskDescription = [fileName, fileURL, destinationPath].joined(separator: ",")
         downloadTask.resume()
         
-        debugPrint("session manager:\(sessionManager) url:\(url) request:\(request)")
+        debugPrint("session manager:\(String(describing: sessionManager)) url:\(String(describing: url)) request:\(String(describing: request))")
         
         let downloadModel = MZDownloadModel.init(fileName: fileName, fileURL: fileURL, destinationPath: destinationPath)
         downloadModel.startTime = Date()
@@ -434,7 +434,7 @@ extension MZDownloadManager {
         let application = UIApplication.shared
         let applicationState = application.applicationState
         
-        if applicationState == UIApplicationState.background {
+        if applicationState == UIApplication.State.background {
             let localNotification = UILocalNotification()
             localNotification.alertBody = notifBody
             localNotification.alertAction = notifAction
