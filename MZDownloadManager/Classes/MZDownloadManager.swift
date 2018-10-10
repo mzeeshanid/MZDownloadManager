@@ -350,10 +350,10 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
 
 extension MZDownloadManager {
     
-    @objc public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String) {
+    @objc public func addDownloadTask(_ fileName: String, request: URLRequest, destinationPath: String) {
         
-        let url = URL(string: fileURL)!
-        let request = URLRequest(url: url)
+        let url = request.url!
+        let fileURL = url.absoluteString
         
         let downloadTask = sessionManager.downloadTask(with: request)
         downloadTask.taskDescription = [fileName, fileURL, destinationPath].joined(separator: ",")
@@ -370,8 +370,20 @@ extension MZDownloadManager {
         delegate?.downloadRequestStarted?(downloadModel, index: downloadingArray.count - 1)
     }
     
+    @objc public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String) {
+        
+        let url = URL(string: fileURL)!
+        let request = URLRequest(url: url)
+        addDownloadTask(fileName, request: request, destinationPath: destinationPath)
+        
+    }
+    
     @objc public func addDownloadTask(_ fileName: String, fileURL: String) {
         addDownloadTask(fileName, fileURL: fileURL, destinationPath: "")
+    }
+    
+    @objc public func addDownloadTask(_ fileName: String, request: URLRequest) {
+        addDownloadTask(fileName, request: request, destinationPath: "")
     }
     
     @objc public func pauseDownloadTaskAtIndex(_ index: Int) {
