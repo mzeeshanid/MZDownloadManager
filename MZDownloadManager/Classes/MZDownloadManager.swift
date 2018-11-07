@@ -179,7 +179,7 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     let receivedBytesCount = Double(downloadTask.countOfBytesReceived)
                     let totalBytesCount = Double(downloadTask.countOfBytesExpectedToReceive)
                     
-                    guard totalBytesWritten == 0 || downloadTime == 0 else {
+                    guard totalBytesWritten != 0 && downloadTime != 0 else {
                         return
                     }
                     
