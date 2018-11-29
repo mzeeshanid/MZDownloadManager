@@ -146,26 +146,29 @@ extension MZDownloadManager {
     
     fileprivate func isValidResumeData(_ resumeData: Data?) -> Bool {
         
-        guard resumeData != nil || resumeData?.count > 0 else {
+        guard let resumeData = resumeData, resumeData.count > 0 else {
             return false
         }
         
-        do {
-            var resumeDictionary : AnyObject!
-            resumeDictionary = try PropertyListSerialization.propertyList(from: resumeData!, options: PropertyListSerialization.MutabilityOptions(), format: nil) as AnyObject
-            var localFilePath = (resumeDictionary?["NSURLSessionResumeInfoLocalPath"] as? String)
-            
-            if localFilePath == nil || localFilePath?.count < 1 {
-                localFilePath = (NSTemporaryDirectory() as String) + (resumeDictionary["NSURLSessionResumeInfoTempFileName"] as! String)
-            }
-            
-            let fileManager : FileManager! = FileManager.default
-            debugPrint("resume data file exists: \(fileManager.fileExists(atPath: localFilePath! as String))")
-            return fileManager.fileExists(atPath: localFilePath! as String)
-        } catch let error as NSError {
-            debugPrint("resume data is nil: \(error)")
+        guard let resumeDictionary = try? PropertyListSerialization.propertyList(from: resumeData, options: PropertyListSerialization.MutabilityOptions(), format: nil) as AnyObject else {
             return false
         }
+        
+        var localFilePath: String? = resumeDictionary["NSURLSessionResumeInfoLocalPath"] as? String
+        
+        if (localFilePath?.isEmpty ?? true) {
+            guard let filename = resumeDictionary["NSURLSessionResumeInfoTempFileName"] as? String else {
+                return false
+            }
+            localFilePath = NSTemporaryDirectory() + filename
+        }
+        guard let tempfile = localFilePath else {
+            return false
+        }
+        let fileManager: FileManager = FileManager.default
+        debugPrint("resume data file exists: \(fileManager.fileExists(atPath: tempfile))")
+        
+        return fileManager.fileExists(atPath: tempfile)
     }
 }
 
