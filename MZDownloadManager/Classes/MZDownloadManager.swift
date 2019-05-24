@@ -219,16 +219,12 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         for (index, downloadModel) in downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
-                let fileName = downloadModel.fileName as NSString
-                let basePath = downloadModel.destinationPath == "" ? MZUtility.baseFilePath : downloadModel.destinationPath
-                let destinationPath = (basePath as NSString).appendingPathComponent(fileName as String)
-                
                 let fileManager : FileManager = FileManager.default
                 
                 //If all set just move downloaded file to the destination
-                if fileManager.fileExists(atPath: basePath) {
-                    let fileURL = URL(fileURLWithPath: destinationPath as String)
-                    debugPrint("directory path = \(destinationPath)")
+                if fileManager.fileExists(atPath: downloadModel.destinationBasePath) {
+                    let fileURL = URL(fileURLWithPath: downloadModel.destinationFilePath)
+                    debugPrint("directory path = \(downloadModel.destinationFilePath)")
                     
                     do {
                         try fileManager.moveItem(at: location, to: fileURL)
