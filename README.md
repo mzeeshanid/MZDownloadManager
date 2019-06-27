@@ -41,6 +41,7 @@ pod "MZDownloadManager"
 
 ## Update
 
+### New helper functions
 New helper functions added to support downloading at custom path. Example project is also updated about the usage.
 
 To download file at custom path you can use the following instance method of MZDownloadManager:
@@ -55,6 +56,22 @@ To download file at custom path you can use the following instance method of MZD
 ```optional func downloadRequestDestinationDoestNotExists(downloadModel: MZDownloadModel, index: Int, location: NSURL)```
 
 * If the above delegate method is not implemented then it will just called the failure method.
+
+
+### Additional Data
+New parameter added to store and pass the additional values of the downloaded files to perform custom functionalities
+
+Example project is also updated about the usage.
+
+```open var additionalData: [String: Any]?)```
+
+#### New helper functions
+
+New helper functions added to support downloading with additional data. 
+
+```public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String, additionalData: [String: Any])```
+
+
 
 > Important: This delegate method will be called on the session's queue.
 
