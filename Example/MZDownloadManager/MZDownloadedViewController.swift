@@ -24,7 +24,7 @@ class MZDownloadedViewController: UITableViewController {
             let contentOfDir: [String] = try FileManager.default.contentsOfDirectory(atPath: MZUtility.baseFilePath as String)
             downloadedFilesArray.append(contentsOf: contentOfDir)
             
-            let index = downloadedFilesArray.index(of: ".DS_Store")
+            let index = downloadedFilesArray.firstIndex(of: ".DS_Store")
             if let index = index {
                 downloadedFilesArray.remove(at: index)
             }
@@ -46,7 +46,7 @@ class MZDownloadedViewController: UITableViewController {
     @objc func downloadFinishedNotification(_ notification : Notification) {
         let fileName : NSString = notification.object as! NSString
         downloadedFilesArray.append(fileName.lastPathComponent)
-        tableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
+        tableView.reloadSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
     }
 }
 
@@ -77,14 +77,14 @@ extension MZDownloadedViewController {
         selectedIndexPath = indexPath
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let fileName : NSString = downloadedFilesArray[(indexPath as NSIndexPath).row] as NSString
         let fileURL  : URL = URL(fileURLWithPath: (MZUtility.baseFilePath as NSString).appendingPathComponent(fileName as String))
         
         do {
             try fileManger.removeItem(at: fileURL)
             downloadedFilesArray.remove(at: (indexPath as NSIndexPath).row)
-            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         } catch let error as NSError {
             debugPrint("Error while deleting file: \(error)")
         }

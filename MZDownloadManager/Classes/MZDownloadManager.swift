@@ -147,22 +147,8 @@ extension MZDownloadManager {
             return false
         }
         
-        do {
-            var resumeDictionary : AnyObject!
-            resumeDictionary = try PropertyListSerialization.propertyList(from: resumeData!, options: PropertyListSerialization.MutabilityOptions(), format: nil) as AnyObject
-            var localFilePath = (resumeDictionary?["NSURLSessionResumeInfoLocalPath"] as? String)
-            
-            if localFilePath == nil || localFilePath?.count < 1 {
-                localFilePath = (NSTemporaryDirectory() as String) + (resumeDictionary["NSURLSessionResumeInfoTempFileName"] as! String)
-            }
-            
-            let fileManager : FileManager! = FileManager.default
-            debugPrint("resume data file exists: \(fileManager.fileExists(atPath: localFilePath! as String))")
-            return fileManager.fileExists(atPath: localFilePath! as String)
-        } catch let error as NSError {
-            debugPrint("resume data is nil: \(error)")
-            return false
-        }
+        return true
+        
     }
 }
 
@@ -205,7 +191,7 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     downloadModel.speed = (speedSize, speedUnit as String)
                     downloadModel.progress = progress
                     
-                    if self.downloadingArray.contains(downloadModel), let objectIndex = self.downloadingArray.index(of: downloadModel) {
+                    if self.downloadingArray.contains(downloadModel), let objectIndex = self.downloadingArray.firstIndex(of: downloadModel) {
                         self.downloadingArray[objectIndex] = downloadModel
                     }
                     

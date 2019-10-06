@@ -84,6 +84,6 @@ extension MZAvailableDownloadsViewController {
         mzDownloadingViewObj?.downloadManager.addDownloadTask(fileName as String, fileURL: fileURL as String, destinationPath: myDownloadPath)
         
         availableDownloadsArray.remove(at: (indexPath as NSIndexPath).row)
-        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.right)
+        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.right)
     }
 }

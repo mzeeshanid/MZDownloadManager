@@ -176,7 +176,7 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
     
     func downloadRequestStarted(_ downloadModel: MZDownloadModel, index: Int) {
         let indexPath = IndexPath.init(row: index, section: 0)
-        tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.fade)
     }
     
     func downloadRequestDidPopulatedInterruptedTasks(_ downloadModels: [MZDownloadModel]) {
@@ -200,7 +200,7 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
         self.safelyDismissAlertController()
         
         let indexPath = IndexPath.init(row: index, section: 0)
-        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
     }
     
     func downloadRequestFinished(_ downloadModel: MZDownloadModel, index: Int) {
@@ -210,7 +210,7 @@ extension MZDownloadManagerViewController: MZDownloadManagerDelegate {
         downloadManager.presentNotificationForDownload("Ok", notifBody: "Download did completed")
         
         let indexPath = IndexPath.init(row: index, section: 0)
-        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
         
         let docDirectoryPath : NSString = (MZUtility.baseFilePath as NSString).appendingPathComponent(downloadModel.fileName) as NSString
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: MZUtility.DownloadCompletedNotif as String), object: docDirectoryPath)
