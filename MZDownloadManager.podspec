@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MZDownloadManager"
-  s.version          = "3.5"
+  s.version          = "3.6"
   s.summary          = "NSURLSession based download manager."
 
   s.description      = <<-DESC
@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   s.source_files = 'MZDownloadManager/Classes/**/*'
 
   s.frameworks = 'UIKit', 'Foundation'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 
 end
