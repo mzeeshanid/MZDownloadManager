@@ -193,11 +193,12 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     }
                     
                     let progress = Float(receivedBytesCount / totalBytesCount)
-                    let speed = Float(totalBytesWritten) / Float(downloadTime)
+                    let speedFloat = Float(totalBytesWritten) / Float(downloadTime)
+                    let speed = max(1, Int64(speedFloat))
                     
                     let remainingContentLength = totalBytesExpectedToWrite - totalBytesWritten
                     
-                    let remainingTime = remainingContentLength / Int64(speed)
+                    let remainingTime = remainingContentLength / speed
                     let hours = Int(remainingTime) / 3600
                     let minutes = (Int(remainingTime) - hours * 3600) / 60
                     let seconds = Int(remainingTime) - hours * 3600 - minutes * 60
@@ -208,8 +209,8 @@ extension MZDownloadManager: URLSessionDownloadDelegate {
                     let downloadedFileSize = MZUtility.calculateFileSizeInUnit(totalBytesWritten)
                     let downloadedSizeUnit = MZUtility.calculateUnit(totalBytesWritten)
                     
-                    let speedSize = MZUtility.calculateFileSizeInUnit(Int64(speed))
-                    let speedUnit = MZUtility.calculateUnit(Int64(speed))
+                    let speedSize = MZUtility.calculateFileSizeInUnit(speed)
+                    let speedUnit = MZUtility.calculateUnit(speed)
                     
                     downloadModel.remainingTime = (hours, minutes, seconds)
                     downloadModel.file = (totalFileSize, totalFileSizeUnit as String)
