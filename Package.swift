@@ -21,7 +21,8 @@ let package = Package(
         .target(
             name: "MZDownloadManager",
             dependencies: [],
-            path: "Sources"),
+            path: "Sources",
+            exclude: ["Example", "MZDownloadManagerTests", "_config.yml", "MZDownloadManager.podspec"]),
         .testTarget(
             name: "MZDownloadManagerTests",
             dependencies: ["MZDownloadManager"],
