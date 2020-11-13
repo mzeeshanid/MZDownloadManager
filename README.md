@@ -9,7 +9,7 @@
 
 ## Features
 
-This download manager uses the iOS 7 NSURLSession api to download files.
+This download manager uses the URLSession api to download files.
 + Can download large files if app is in background.
 + Can download files if app is in background.
 + Can download multiple files at a time.
@@ -38,6 +38,10 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "MZDownloadManager"
 ```
+
+To install it by using Swift Package Manager:
++ In Xcode 11+ Select File > Packages > Add Package Dependency....
++ Enter this project's URL: https://github.com/mzeeshanid/MZDownloadManager.git
 
 ## Update
 
