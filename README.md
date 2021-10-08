@@ -62,6 +62,9 @@ To download file at custom path you can use the following instance method of MZD
 
 > Important: This delegate method will be called on the session's queue.
 
+## Try In a Live App
+MZDownloadManager is used in [MZFileManager](https://apps.apple.com/us/app/mzfilemanager/id1436458918) app. To learn more about the app features, [visit this page](https://www.mzeeshan.me/mzfilemanage).
+
 ## Author
 
 Muhammad Zeeshan, mzeeshanid@yahoo.com
