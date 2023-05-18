@@ -55,7 +55,7 @@ open class MZDownloadModel: NSObject {
         self.fileURL = fileURL
     }
     
-    convenience init(fileName: String, fileURL: String, destinationPath: String) {
+    public convenience init(fileName: String, fileURL: String, destinationPath: String) {
         self.init(fileName: fileName, fileURL: fileURL)
         
         self.destinationPath = destinationPath
