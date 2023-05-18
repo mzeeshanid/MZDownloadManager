@@ -64,7 +64,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 open class MZDownloadManager: NSObject {
     
-    fileprivate(set) var sessionManager: URLSession!
+    private var sessionManager: URLSession!
     
     fileprivate var backgroundSessionCompletionHandler: (() -> Void)?
     
@@ -72,7 +72,7 @@ open class MZDownloadManager: NSObject {
     fileprivate let TaskDescFileURLIndex = 1
     fileprivate let TaskDescFileDestinationIndex = 2
     
-    fileprivate(set) weak var delegate: MZDownloadManagerDelegate?
+    private weak var delegate: MZDownloadManagerDelegate?
     
     open var downloadingArray: [MZDownloadModel] = []
     
