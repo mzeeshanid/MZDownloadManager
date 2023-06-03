@@ -46,6 +46,8 @@ open class MZDownloadModel: NSObject {
     
     open var startTime: Date?
     
+    open var finished: (() -> Void)?
+    
     fileprivate(set) open var destinationPath: String = ""
     
     fileprivate convenience init(fileName: String, fileURL: String) {
@@ -55,7 +57,7 @@ open class MZDownloadModel: NSObject {
         self.fileURL = fileURL
     }
     
-    convenience init(fileName: String, fileURL: String, destinationPath: String) {
+    public convenience init(fileName: String, fileURL: String, destinationPath: String) {
         self.init(fileName: fileName, fileURL: fileURL)
         
         self.destinationPath = destinationPath
